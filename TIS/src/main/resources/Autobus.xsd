@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.TIS.com/autobus"
+	xmlns:tns="http://www.TIS.com/autobus" 
+	elementFormDefault="qualified">
+	
+				<element name="ConsultarViajeRequest">
+					<complexType>
+						<sequence>
+							<element type="string" name="Salida" />
+							<element type="string" name="Destino" />
+							<element type="string" name="Fecha" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ConsultarViajeResponse">
+					<complexType>
+						<sequence>
+							<element type="string" name="IDHora" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="SeleccionAutobusRequest">
+					<complexType>
+						<sequence>
+							<element type="int" name="IDSeleccion" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="SeleccionAutobusResponse">
+					<complexType>
+						<sequence>
+							<element type="string" name="AsientoDisponible" />
+						</sequence>
+					</complexType>
+				</element>
+										
+				<element name="SeleccionAsientoRequest">
+					<complexType>
+						<sequence>
+							<element type="int" name="AsientoSeleccionado" />
+							<element type="string" name="NombrePasajero" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ConfirmarViajeResponse">
+					<complexType>
+						<sequence>
+							<element type="int" name="IDBoleto" />
+							<element type="string" name="Salida" />
+							<element type="string" name="Destino" />
+							<element type="string" name="Fecha" />
+							<element type="string" name="Hora" />
+							<element type="int" name="IDAutobus" />
+							<element type="int" name="Asiento" />
+							<element type="string" name="NombrePasajero" />
+						</sequence>
+					</complexType>
+				</element>
+																
+				<element name="ConfirmarViajeRequest">
+					<complexType>
+						<sequence>
+							<element type="string" name="AceptarNO" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ModificarBoletoRequest">
+					<complexType>
+						<sequence>
+							<element type="int" name="IDBoleto" />
+						</sequence>
+					</complexType>
+				</element>
+	
+				<element name="ModificarBoletoResponse">
+					<complexType>
+						<sequence>
+							<element type="string" name="Hora" />
+							<element type="string" name="NombrePasajero" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ConfirmacionModificarRequest">
+					<complexType>
+						<sequence>
+							<element type="string" name="Confirmar" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ConfirmacionModificarResponse">
+					<complexType>
+						<sequence>
+							<element type="string" name="Confirmar" />
+						</sequence>
+					</complexType>
+				</element>
+	
+				<element name="CancelarBoletoRequest">
+					<complexType>
+						<sequence>
+							<element type="int" name="IDBoleto" />
+						</sequence>
+					</complexType>
+				</element>
+	
+				<element name="CancelarBoletoResponse">
+					<complexType>
+						<sequence>
+							<element type="int" name="IDBoleto" />
+							<element type="string" name="Salida" />
+							<element type="string" name="Destino" />
+							<element type="string" name="Fecha" />
+							<element type="string" name="Hora" />
+							<element type="int" name="IDAutobus" />
+							<element type="int" name="Asiento" />
+							<element type="string" name="NombrePasajero" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ConfirmacionCancelarRequest">
+					<complexType>
+						<sequence>
+							<element type="string" name="Confirmar" />
+						</sequence>
+					</complexType>
+				</element>
+	
+				<element name="ConfirmacionCancelarResponse">
+					<complexType>
+						<sequence>
+							<element type="string" name="Confirmar" />
+						</sequence>
+					</complexType>
+				</element>
+</schema>
