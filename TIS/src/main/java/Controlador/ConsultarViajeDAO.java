@@ -14,6 +14,10 @@ public class ConsultarViajeDAO {
 	private String Destino;
 	private String Fecha;
 	private ConexionBD conexion;
+	
+	public ConsultarViajeDAO() {
+		
+	}
 
 	public ConsultarViajeDAO(String origen, String destino, String fecha) {
 		Origen = origen;
@@ -21,7 +25,7 @@ public class ConsultarViajeDAO {
 		Fecha = fecha;
 	}
 	
-	public ArrayList<Viajes> consultViaje() {
+	public ArrayList<Viajes> consultViaje(){
 		
 		
 		ArrayList<Viajes> viaje = new ArrayList<Viajes>(); 
@@ -49,4 +53,24 @@ public class ConsultarViajeDAO {
 		}
 		return viajesAceptados;	
 	}
+	
+	
+	public int getIDAutobus(int idAutobus) {
+		int valor = 0;
+		this.conexion = new ConexionBD();
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT IDAutobus FROM Asientos WHERE IDAutobus="+idAutobus);
+			if(rs.next()) {
+				valor = rs.getInt("IDAutobus");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return valor;
+	}
+	
+	
+	
+	
 }

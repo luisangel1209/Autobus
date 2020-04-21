@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.04.20 a las 03:25:58 PM CDT 
+// Generado el: 2020.04.20 a las 10:53:59 PM CDT 
 //
 
 
@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="AsientoSeleccionado" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="IDAsientoSeleccionado" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="NombrePasajero" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
@@ -37,31 +37,39 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "asientoSeleccionado",
+    "idAsientoSeleccionado",
     "nombrePasajero"
 })
 @XmlRootElement(name = "SeleccionAsientoRequest")
 public class SeleccionAsientoRequest {
 
-    @XmlElement(name = "AsientoSeleccionado")
-    protected int asientoSeleccionado;
+    @XmlElement(name = "IDAsientoSeleccionado", required = true)
+    protected String idAsientoSeleccionado;
     @XmlElement(name = "NombrePasajero", required = true)
     protected String nombrePasajero;
 
     /**
-     * Obtiene el valor de la propiedad asientoSeleccionado.
+     * Obtiene el valor de la propiedad idAsientoSeleccionado.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getAsientoSeleccionado() {
-        return asientoSeleccionado;
+    public String getIDAsientoSeleccionado() {
+        return idAsientoSeleccionado;
     }
 
     /**
-     * Define el valor de la propiedad asientoSeleccionado.
+     * Define el valor de la propiedad idAsientoSeleccionado.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setAsientoSeleccionado(int value) {
-        this.asientoSeleccionado = value;
+    public void setIDAsientoSeleccionado(String value) {
+        this.idAsientoSeleccionado = value;
     }
 
     /**

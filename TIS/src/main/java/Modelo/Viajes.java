@@ -9,6 +9,10 @@ public class Viajes {
 	private String Hora;
 	private String Precio;
 	
+	public Viajes() {
+		
+	}
+	
 	public Viajes(int iDViaje, int iDAutobus, String origen, String destino, String fecha, String hora, String precio) {
 		super();
 		IDViaje = iDViaje;

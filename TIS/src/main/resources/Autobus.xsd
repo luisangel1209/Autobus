@@ -35,7 +35,8 @@
 				<element name="SeleccionAutobusResponse">
 					<complexType>
 						<sequence>
-							<element type="string" name="AsientoDisponible" />
+							<element type="string" name="IdAsiento" maxOccurs="unbounded"/>
+							<element type="string" name="Estatus" maxOccurs="unbounded"/>
 						</sequence>
 					</complexType>
 				</element>
@@ -43,8 +44,8 @@
 				<element name="SeleccionAsientoRequest">
 					<complexType>
 						<sequence>
-							<element type="int" name="AsientoSeleccionado" />
-							<element type="string" name="NombrePasajero" />
+							<element type="string" name="IDAsientoSeleccionado"/>
+							<element type="string" name="NombrePasajero"/>
 						</sequence>
 					</complexType>
 				</element>
@@ -67,7 +68,7 @@
 				<element name="ConfirmarViajeRequest">
 					<complexType>
 						<sequence>
-							<element type="string" name="AceptarNO" />
+							<element type="string" name="Confirmar" />
 						</sequence>
 					</complexType>
 				</element>

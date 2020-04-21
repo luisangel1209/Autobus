@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class ConexionBD {
 	
-	Connection conexion = null;
+	private static Connection conexion = null;
 	
 	public String driver = "com.mysql.jdbc.Driver";
 	public String database =  "Vuelos";
@@ -16,13 +16,15 @@ public class ConexionBD {
 	public String username = "luisangel12";
 	public String password = "garcia12luis";
 	
-	public Connection connect() {
+	public Connection connect(){
+		if( conexion == null) {
 			try {
 				this.conexion = DriverManager.getConnection(this.url,this.username,this.password);
 				System.out.println("Conexion establecida");
 			} catch (SQLException e) {
 				System.out.println("Conexion Fallida!:\n" + e.getCause());
 			}
+		}
 		return this.conexion;
 	}
 }

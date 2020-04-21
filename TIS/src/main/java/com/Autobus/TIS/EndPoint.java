@@ -24,8 +24,10 @@ import com.tis.autobus.SeleccionAsientoRequest;
 import com.tis.autobus.SeleccionAutobusRequest;
 import com.tis.autobus.SeleccionAutobusResponse;
 
+import Controlador.AsientoViajeDAO;
 import Controlador.ConsultarViajeDAO;
 import Modelo.Viajes;
+import Modelo.Asientos;
 
 
 @Endpoint
@@ -35,6 +37,7 @@ public class EndPoint {
 	 * Metodo para consultar la informacion de una viaje
 	 * @param peticion
 	 * @return
+	 * @throws ClassNotFoundException 
 	 */
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConsultarViajeRequest")
 	
@@ -59,13 +62,43 @@ public class EndPoint {
 	}
 	
 	
+	
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="SeleccionAutobusRequest")
 	@ResponsePayload
 	public SeleccionAutobusResponse getSeleccionAutobus(@RequestPayload SeleccionAutobusRequest peticion1){
-		SeleccionAutobusResponse autobus = new SeleccionAutobusResponse();
-		autobus.setAsientoDisponible("Asientos Disponibles");
-		return autobus;
+		SeleccionAutobusResponse respuesta = new SeleccionAutobusResponse();
+		AsientoViajeDAO asiento = new AsientoViajeDAO(peticion1.getIDSeleccion());
+		ArrayList<Asientos> asientosViaje = asiento.getAsientos();
+		
+		if(asientosViaje.size() != 0) {
+			ArrayList<String>idAsientos = new ArrayList<String>();
+			ArrayList<String> estatus = new ArrayList<String>();
+			for(Asientos a:asientosViaje) {
+				idAsientos.add(a.getIDAsiento());
+				if(a.getEstatus()) {
+					estatus.add(a.getIDAsiento()+"| Disponible");
+				}else {
+					estatus.add(a.getIDAsiento()+"| Ocupado");	
+				}
+			}
+			respuesta.setIdAsiento(idAsientos);		
+			respuesta.setEstatus(estatus);
+		}else {
+			ArrayList<String>idAsientos = new ArrayList<String>();
+			ArrayList<String> estatus = new ArrayList<String>();
+			idAsientos.add("");
+			estatus.add("");
+			respuesta.setIdAsiento(idAsientos);
+			respuesta.setEstatus(estatus);
+		}
+		return respuesta;
 	}
+	
+	
+	
+	
+	
+	
 	
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="SeleccionAsientoRequest")
 	@ResponsePayload
@@ -75,18 +108,20 @@ public class EndPoint {
 		confi.setDestino("CDMX");
 		confi.setFecha("12-12-20");
 		confi.setHora("13:00");
-		confi.setNombrePasajero(peticion.getNombrePasajero());
-		confi.setAsiento(peticion.getAsientoSeleccionado());
+		//confi.setNombrePasajero(peticion.getNombrePasajero());
+		//confi.setAsiento(peticion.getAsientoSeleccionado());
 		confi.setIDAutobus(123);
 		confi.setIDBoleto(12345);
 		return confi;
 	}
 	
+	
+	
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConfirmarViajeRequest")
 	@ResponsePayload
 	public ConfirmarViajeRequest getConfirmar2(@RequestPayload ConfirmarViajeRequest peticion){
 		ConfirmarViajeRequest confi2 = new ConfirmarViajeRequest();
-		confi2.setAceptarNO("Viaje Aceptadoo");
+		confi2.setConfirmar("Viaje Aceptadoo");
 		return confi2;
 	}
 	
