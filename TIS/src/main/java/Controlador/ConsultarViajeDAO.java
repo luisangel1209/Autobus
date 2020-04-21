@@ -34,7 +34,7 @@ public class ConsultarViajeDAO {
 		
 		this.conexion = new ConexionBD();
 		try {
-			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT IDAutobus, Hora, Precio FROM Viajes WHERE Fecha='"+this.Fecha+"'");
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Viajes WHERE Fecha='"+this.Fecha+"'");
 			while(rs.next()) {
 				viaje.add(new Viajes(rs.getInt("IDViaje"), rs.getInt("IDAutobus"), rs.getString("Origen"), rs.getString("Destino"), rs.getString("Fecha"), rs.getString("Hora"), rs.getString("Precio")));
 			}

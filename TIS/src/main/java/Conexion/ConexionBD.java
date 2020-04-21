@@ -14,7 +14,7 @@ public class ConexionBD {
 	public String port = "3306";
 	public String url = "jdbc:mysql://"+hostname+":"+port+"/"+database+"?useTimezone=true&serverTimezone=UTC";
 	public String username = "luisangel12";
-	public String password = "garcia12luis";
+	public String password = "garcia1209luis";
 	
 	public Connection connect(){
 		if( conexion == null) {

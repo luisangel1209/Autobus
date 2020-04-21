@@ -1,5 +1,8 @@
 package Modelo;
 
+import java.sql.Array;
+import java.util.ArrayList;
+
 public class Asientos {
 	
 	private String IDAsiento;
@@ -17,8 +20,8 @@ public class Asientos {
 	public String getIDAsiento() {
 		return IDAsiento;
 	}
-	public void setIDAsiento(String iDAsiento) {
-		IDAsiento = iDAsiento;
+	public String setIDAsiento(String idAsientos) {
+		return IDAsiento = idAsientos;
 	}
 	public int getNumeroAsiento() {
 		return NumeroAsiento;
@@ -35,8 +38,8 @@ public class Asientos {
 	public boolean getEstatus() {
 		return Estatus;
 	}
-	public void setEstatus(boolean estatus) {
-		Estatus = estatus;
+	public void setEstatus(boolean estatus2) {
+		Estatus = estatus2;
 	}
 	
 	

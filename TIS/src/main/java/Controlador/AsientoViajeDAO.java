@@ -18,6 +18,10 @@ public class AsientoViajeDAO {
 		idAutobus = iDAutobus;
 	}
 	
+	public AsientoViajeDAO() {
+		
+	}
+	
 	public ArrayList<Asientos> getAsientos(){
 		
 		ArrayList<Asientos> lista = new ArrayList<Asientos>();

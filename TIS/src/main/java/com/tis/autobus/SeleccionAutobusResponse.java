@@ -107,15 +107,13 @@ public class SeleccionAutobusResponse {
         }
         return this.estatus;
     }
-
-	public void setIdAsiento(ArrayList<String> idAsientos) {
-		// TODO Auto-generated method stub
-		
+    
+    
+	public void setIdAsiento(List<String> idAsiento) {
+		this.idAsiento = idAsiento;
 	}
 
-	public void setEstatus(ArrayList<String> estatus2) {
-		// TODO Auto-generated method stub
-		
+	public void setEstatus(List<String> estatus) {
+		this.estatus = estatus;
 	}
-
 }

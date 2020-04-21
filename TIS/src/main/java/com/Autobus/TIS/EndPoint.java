@@ -71,17 +71,18 @@ public class EndPoint {
 		ArrayList<Asientos> asientosViaje = asiento.getAsientos();
 		
 		if(asientosViaje.size() != 0) {
-			ArrayList<String>idAsientos = new ArrayList<String>();
+			ArrayList<String> idAsientos = new ArrayList<String>();
 			ArrayList<String> estatus = new ArrayList<String>();
 			for(Asientos a:asientosViaje) {
 				idAsientos.add(a.getIDAsiento());
+
 				if(a.getEstatus()) {
 					estatus.add(a.getIDAsiento()+"| Disponible");
 				}else {
-					estatus.add(a.getIDAsiento()+"| Ocupado");	
+					estatus.add(a.getIDAsiento()+"| Ocupado");
 				}
 			}
-			respuesta.setIdAsiento(idAsientos);		
+			respuesta.setIdAsiento(idAsientos);	
 			respuesta.setEstatus(estatus);
 		}else {
 			ArrayList<String>idAsientos = new ArrayList<String>();
