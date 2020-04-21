@@ -75,11 +75,10 @@ public class EndPoint {
 			ArrayList<String> estatus = new ArrayList<String>();
 			for(Asientos a:asientosViaje) {
 				idAsientos.add(a.getIDAsiento());
-
-				if(a.getEstatus()) {
-					estatus.add(a.getIDAsiento()+"| Disponible");
+				if(a.getEstatus() == "Ocupado") {
+					estatus.add(a.getIDAsiento()+" | "+ a.getEstatus());
 				}else {
-					estatus.add(a.getIDAsiento()+"| Ocupado");
+					estatus.add(a.getIDAsiento()+" | "+ a.getEstatus());
 				}
 			}
 			respuesta.setIdAsiento(idAsientos);	

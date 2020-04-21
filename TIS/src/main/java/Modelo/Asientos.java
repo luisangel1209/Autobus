@@ -8,9 +8,9 @@ public class Asientos {
 	private String IDAsiento;
 	private int NumeroAsiento;
 	private int IDAutobus;
-	private boolean Estatus;
+	private String Estatus;
 	
-	public Asientos(String iDAsiento, int numeroAsiento, int iDAutobus, boolean estatus) {
+	public Asientos(String iDAsiento, int numeroAsiento, int iDAutobus, String estatus) {
 		super();
 		IDAsiento = iDAsiento;
 		NumeroAsiento = numeroAsiento;
@@ -35,11 +35,11 @@ public class Asientos {
 	public void setIDAutobus(int iDAutobus) {
 		IDAutobus = iDAutobus;
 	}
-	public boolean getEstatus() {
+	public String getEstatus() {
 		return Estatus;
 	}
-	public void setEstatus(boolean estatus2) {
-		Estatus = estatus2;
+	public void setEstatus(String estatus) {
+		Estatus = estatus;
 	}
 	
 	

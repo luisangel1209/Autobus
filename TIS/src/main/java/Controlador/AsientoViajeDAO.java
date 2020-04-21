@@ -35,7 +35,7 @@ public class AsientoViajeDAO {
 		try {
 			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Asientos WHERE IDAutobus="+ iDAutobus);
 			while(rs.next()) {
-				lista.add(new Asientos(rs.getString("IDAsiento"), rs.getInt("NumeroAsiento"), rs.getInt("IDAutobus"), rs.getBoolean("Estatus")));
+				lista.add(new Asientos(rs.getString("IDAsiento"), rs.getInt("NumeroAsiento"), rs.getInt("IDAutobus"), rs.getString("Estatus")));
 			}
 			
 		} catch (SQLException e) {
