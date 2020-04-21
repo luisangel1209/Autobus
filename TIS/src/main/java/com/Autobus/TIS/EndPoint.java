@@ -1,5 +1,8 @@
 package com.Autobus.TIS;
 
+
+import java.util.ArrayList;
+
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -21,17 +24,40 @@ import com.tis.autobus.SeleccionAsientoRequest;
 import com.tis.autobus.SeleccionAutobusRequest;
 import com.tis.autobus.SeleccionAutobusResponse;
 
+import Controlador.ConsultarViajeDAO;
+import Modelo.Viajes;
+
+
 @Endpoint
 public class EndPoint {
 	
+	/**
+	 * Metodo para consultar la informacion de una viaje
+	 * @param peticion
+	 * @return
+	 */
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConsultarViajeRequest")
 	
 	@ResponsePayload
 	public ConsultarViajeResponse getConsultaViaje(@RequestPayload ConsultarViajeRequest peticion){
 		ConsultarViajeResponse respuesta = new ConsultarViajeResponse();
-		respuesta.setIDHora("Autobus: ADO ID:123 Hora: 13:00 ");
+		
+		ConsultarViajeDAO consulta = new ConsultarViajeDAO(peticion.getSalida(),peticion.getDestino(),peticion.getFecha());
+		ArrayList<Viajes> lista = consulta.consultViaje();
+		
+		if(lista.size() !=0) {
+			respuesta.setIDAutobus(lista.get(0).getIDAutobus());
+			respuesta.setHora(lista.get(0).getHora());
+			respuesta.setPrecio(lista.get(0).getPrecio());
+		}else {
+			respuesta.setIDAutobus(0);
+			respuesta.setHora("");
+			respuesta.setPrecio("");
+		}
+		
 		return respuesta;
 	}
+	
 	
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="SeleccionAutobusRequest")
 	@ResponsePayload

@@ -17,7 +17,9 @@
 				<element name="ConsultarViajeResponse">
 					<complexType>
 						<sequence>
-							<element type="string" name="IDHora" />
+							<element type="int" name="IDAutobus" />
+							<element type="string" name="Hora" />
+							<element type="string" name="Precio" />
 						</sequence>
 					</complexType>
 				</element>
