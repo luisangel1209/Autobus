@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.04.21 a las 08:02:49 PM CDT 
+// Generado el: 2020.04.22 a las 10:47:20 AM CDT 
 //
 
 
@@ -37,54 +37,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SeleccionAsientoRequest }
-     * 
-     */
-    public SeleccionAsientoRequest createSeleccionAsientoRequest() {
-        return new SeleccionAsientoRequest();
-    }
-
-    /**
-     * Create an instance of {@link ConfirmarViajeResponse }
-     * 
-     */
-    public ConfirmarViajeResponse createConfirmarViajeResponse() {
-        return new ConfirmarViajeResponse();
-    }
-
-    /**
-     * Create an instance of {@link ConfirmacionModificarRequest }
-     * 
-     */
-    public ConfirmacionModificarRequest createConfirmacionModificarRequest() {
-        return new ConfirmacionModificarRequest();
-    }
-
-    /**
-     * Create an instance of {@link SeleccionAutobusResponse }
-     * 
-     */
-    public SeleccionAutobusResponse createSeleccionAutobusResponse() {
-        return new SeleccionAutobusResponse();
-    }
-
-    /**
-     * Create an instance of {@link ConfirmarViajeRequest }
-     * 
-     */
-    public ConfirmarViajeRequest createConfirmarViajeRequest() {
-        return new ConfirmarViajeRequest();
-    }
-
-    /**
-     * Create an instance of {@link CancelarBoletoResponse }
-     * 
-     */
-    public CancelarBoletoResponse createCancelarBoletoResponse() {
-        return new CancelarBoletoResponse();
-    }
-
-    /**
      * Create an instance of {@link ConsultarViajeRequest }
      * 
      */
@@ -109,6 +61,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link SeleccionAsientoRequest }
+     * 
+     */
+    public SeleccionAsientoRequest createSeleccionAsientoRequest() {
+        return new SeleccionAsientoRequest();
+    }
+
+    /**
+     * Create an instance of {@link ConfirmarViajeResponse }
+     * 
+     */
+    public ConfirmarViajeResponse createConfirmarViajeResponse() {
+        return new ConfirmarViajeResponse();
+    }
+
+    /**
      * Create an instance of {@link ModificarBoletoResponse }
      * 
      */
@@ -117,19 +85,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ConfirmacionCancelarResponse }
+     * Create an instance of {@link SeleccionAutobusResponse }
      * 
      */
-    public ConfirmacionCancelarResponse createConfirmacionCancelarResponse() {
-        return new ConfirmacionCancelarResponse();
-    }
-
-    /**
-     * Create an instance of {@link ConfirmacionModificarResponse }
-     * 
-     */
-    public ConfirmacionModificarResponse createConfirmacionModificarResponse() {
-        return new ConfirmacionModificarResponse();
+    public SeleccionAutobusResponse createSeleccionAutobusResponse() {
+        return new SeleccionAutobusResponse();
     }
 
     /**
@@ -149,11 +109,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ConfirmacionCancelarRequest }
+     * Create an instance of {@link CancelarBoletoResponse }
      * 
      */
-    public ConfirmacionCancelarRequest createConfirmacionCancelarRequest() {
-        return new ConfirmacionCancelarRequest();
+    public CancelarBoletoResponse createCancelarBoletoResponse() {
+        return new CancelarBoletoResponse();
     }
 
 }

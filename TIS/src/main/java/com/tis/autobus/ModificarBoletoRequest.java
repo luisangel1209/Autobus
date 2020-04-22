@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.04.21 a las 08:02:49 PM CDT 
+// Generado el: 2020.04.22 a las 10:47:20 AM CDT 
 //
 
 
@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="IDBoleto" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="NuevoNombrePasajero" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,13 +37,16 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "idBoleto"
+    "idBoleto",
+    "nuevoNombrePasajero"
 })
 @XmlRootElement(name = "ModificarBoletoRequest")
 public class ModificarBoletoRequest {
 
     @XmlElement(name = "IDBoleto")
     protected int idBoleto;
+    @XmlElement(name = "NuevoNombrePasajero", required = true)
+    protected String nuevoNombrePasajero;
 
     /**
      * Obtiene el valor de la propiedad idBoleto.
@@ -58,6 +62,30 @@ public class ModificarBoletoRequest {
      */
     public void setIDBoleto(int value) {
         this.idBoleto = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad nuevoNombrePasajero.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getNuevoNombrePasajero() {
+        return nuevoNombrePasajero;
+    }
+
+    /**
+     * Define el valor de la propiedad nuevoNombrePasajero.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setNuevoNombrePasajero(String value) {
+        this.nuevoNombrePasajero = value;
     }
 
 }

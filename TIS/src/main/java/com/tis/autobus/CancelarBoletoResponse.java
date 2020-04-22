@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.04.21 a las 08:02:49 PM CDT 
+// Generado el: 2020.04.22 a las 10:47:20 AM CDT 
 //
 
 
@@ -33,6 +33,7 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="IDAutobus" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="Asiento" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="NombrePasajero" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="MensajeConfirmacion" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -50,7 +51,8 @@ import javax.xml.bind.annotation.XmlType;
     "hora",
     "idAutobus",
     "asiento",
-    "nombrePasajero"
+    "nombrePasajero",
+    "mensajeConfirmacion"
 })
 @XmlRootElement(name = "CancelarBoletoResponse")
 public class CancelarBoletoResponse {
@@ -71,6 +73,8 @@ public class CancelarBoletoResponse {
     protected int asiento;
     @XmlElement(name = "NombrePasajero", required = true)
     protected String nombrePasajero;
+    @XmlElement(name = "MensajeConfirmacion", required = true)
+    protected String mensajeConfirmacion;
 
     /**
      * Obtiene el valor de la propiedad idBoleto.
@@ -238,6 +242,30 @@ public class CancelarBoletoResponse {
      */
     public void setNombrePasajero(String value) {
         this.nombrePasajero = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad mensajeConfirmacion.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getMensajeConfirmacion() {
+        return mensajeConfirmacion;
+    }
+
+    /**
+     * Define el valor de la propiedad mensajeConfirmacion.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setMensajeConfirmacion(String value) {
+        this.mensajeConfirmacion = value;
     }
 
 }

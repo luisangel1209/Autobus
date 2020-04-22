@@ -65,14 +65,7 @@
 							<element type="string" name="Asiento" />
 							<element type="string" name="NombrePasajero" />
 							<element type="string" name="Correo" />
-						</sequence>
-					</complexType>
-				</element>
-																
-				<element name="ConfirmarViajeRequest">
-					<complexType>
-						<sequence>
-							<element type="string" name="Confirmar" />
+							<element type="string" name="MensajeConfirmacion" />
 						</sequence>
 					</complexType>
 				</element>
@@ -81,6 +74,7 @@
 					<complexType>
 						<sequence>
 							<element type="int" name="IDBoleto" />
+							<element type="string" name="NuevoNombrePasajero" />
 						</sequence>
 					</complexType>
 				</element>
@@ -88,24 +82,7 @@
 				<element name="ModificarBoletoResponse">
 					<complexType>
 						<sequence>
-							<element type="string" name="Hora" />
-							<element type="string" name="NombrePasajero" />
-						</sequence>
-					</complexType>
-				</element>
-				
-				<element name="ConfirmacionModificarRequest">
-					<complexType>
-						<sequence>
-							<element type="string" name="Confirmar" />
-						</sequence>
-					</complexType>
-				</element>
-				
-				<element name="ConfirmacionModificarResponse">
-					<complexType>
-						<sequence>
-							<element type="string" name="Confirmar" />
+							<element type="string" name="MensajeConfirmacion" />
 						</sequence>
 					</complexType>
 				</element>
@@ -129,22 +106,7 @@
 							<element type="int" name="IDAutobus" />
 							<element type="int" name="Asiento" />
 							<element type="string" name="NombrePasajero" />
-						</sequence>
-					</complexType>
-				</element>
-				
-				<element name="ConfirmacionCancelarRequest">
-					<complexType>
-						<sequence>
-							<element type="string" name="Confirmar" />
-						</sequence>
-					</complexType>
-				</element>
-	
-				<element name="ConfirmacionCancelarResponse">
-					<complexType>
-						<sequence>
-							<element type="string" name="Confirmar" />
+							<element type="string" name="MensajeConfirmacion" />
 						</sequence>
 					</complexType>
 				</element>

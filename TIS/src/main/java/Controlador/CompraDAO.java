@@ -11,12 +11,18 @@ public class CompraDAO {
 	private int idAutobus;
 	private String idAsiento;
 	private String NombrePasajero;
+	private String NuevoNombrePasajero;
 	private String Correo;
 	private ConexionBD conexion;
 	private int idBoleto;
 	
-	private CompraDAO(int iDBoleto) {
+	public CompraDAO(int iDBoleto) {
 		this.idBoleto = iDBoleto;
+	}
+	
+	public CompraDAO(int iDBoleto, String nuevonombrepasajero) {
+		this.idBoleto = iDBoleto;
+		this.NuevoNombrePasajero = nuevonombrepasajero;
 	}
 
 	public CompraDAO(int idViaje, int idAutobus, String idAsiento, String nombrePasajero, String correo) {
@@ -48,6 +54,22 @@ public class CompraDAO {
 					e.printStackTrace();
 				}
 			}
+		}
+		return resultado;
+	}
+	
+	public boolean ModificarCompra() {
+		boolean resultado = false;
+		ClienteDAO cliente = new ClienteDAO(this.idBoleto);
+		int numerocliente = cliente.getNumCliente2();
+		String sql = "UPDATE Clientes SET Nombre='"+this.NuevoNombrePasajero+"' WHERE NumeroCliente="+numerocliente;
+		this.conexion = new ConexionBD();
+		try {
+			this.conexion.connect().createStatement().execute(sql);
+			resultado=true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
 		}
 		return resultado;
 	}

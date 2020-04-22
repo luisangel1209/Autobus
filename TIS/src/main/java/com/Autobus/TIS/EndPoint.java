@@ -10,11 +10,6 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.tis.autobus.CancelarBoletoRequest;
 import com.tis.autobus.CancelarBoletoResponse;
-import com.tis.autobus.ConfirmacionCancelarRequest;
-import com.tis.autobus.ConfirmacionCancelarResponse;
-import com.tis.autobus.ConfirmacionModificarRequest;
-import com.tis.autobus.ConfirmacionModificarResponse;
-import com.tis.autobus.ConfirmarViajeRequest;
 import com.tis.autobus.ConfirmarViajeResponse;
 import com.tis.autobus.ConsultarViajeRequest;
 import com.tis.autobus.ConsultarViajeResponse;
@@ -123,42 +118,34 @@ public class EndPoint {
 				respuesta.setAsiento(peticion.getIDAsientoSeleccionado());
 				respuesta.setNombrePasajero(peticion.getNombrePasajero());
 				respuesta.setCorreo(peticion.getCorreo());
+				respuesta.setMensajeConfirmacion("Compra Realizada con exito");
 			}
 		}else {
+			respuesta.setIDBoleto(0);
 			respuesta.setSalida("");
 			respuesta.setDestino("");
 			respuesta.setFecha("");
 			respuesta.setHora("");
 			respuesta.setIDAutobus(0);
+			respuesta.setAsiento("");
 			respuesta.setNombrePasajero("");
+			respuesta.setCorreo("");
+			respuesta.setMensajeConfirmacion("No se pudo realizar la Compra");
 		}	
 		return respuesta;
 	}
 
-
-	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConfirmarViajeRequest")
-	@ResponsePayload
-	public ConfirmarViajeRequest getConfirmar2(@RequestPayload ConfirmarViajeRequest peticion){
-		ConfirmarViajeRequest confi2 = new ConfirmarViajeRequest();
-		confi2.setConfirmar("Viaje Aceptadoo");
-		return confi2;
-	}
-	
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ModificarBoletoRequest")
 	@ResponsePayload
 	public ModificarBoletoResponse getModificar(@RequestPayload ModificarBoletoRequest peticion){
-		ModificarBoletoResponse modi = new ModificarBoletoResponse();
-		modi.setHora("13:00");
-		modi.setNombrePasajero("Jesus");
-		return modi;
-	}
-	
-	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConfirmacionModificarRequest")
-	@ResponsePayload
-	public ConfirmacionModificarResponse getModificarConfirmacion(@RequestPayload ConfirmacionModificarRequest peticion){
-		ConfirmacionModificarResponse modi2 = new ConfirmacionModificarResponse();
-		modi2.setConfirmar("Boleto Modificado");
-		return modi2;
+		ModificarBoletoResponse resultado = new ModificarBoletoResponse();
+		CompraDAO compra = new CompraDAO(peticion.getIDBoleto(), peticion.getNuevoNombrePasajero());
+		if(compra.ModificarCompra()) {
+			resultado.setMensajeConfirmacion("Boleto Modificado");
+		}else {
+			resultado.setMensajeConfirmacion("No se pudo realizar la modificacion");
+		}
+		return resultado;
 	}
 	
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="CancelarBoletoRequest")
@@ -176,11 +163,4 @@ public class EndPoint {
 		return cancel;
 	}
 	
-	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConfirmacionCancelarRequest")
-	@ResponsePayload
-	public ConfirmacionCancelarResponse getCancelarConfirmacion(@RequestPayload ConfirmacionCancelarRequest peticion){
-		ConfirmacionCancelarResponse cancel2 = new ConfirmacionCancelarResponse();
-		cancel2.setConfirmar("Boleto Cancelado");
-		return cancel2;
-	}
 }
