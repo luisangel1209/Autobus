@@ -25,6 +25,7 @@ import com.tis.autobus.SeleccionAutobusRequest;
 import com.tis.autobus.SeleccionAutobusResponse;
 
 import Controlador.AsientoViajeDAO;
+import Controlador.CompraDAO;
 import Controlador.ConsultarViajeDAO;
 import Modelo.Viajes;
 import Modelo.Asientos;
@@ -103,20 +104,38 @@ public class EndPoint {
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="SeleccionAsientoRequest")
 	@ResponsePayload
 	public ConfirmarViajeResponse getConfirmar(@RequestPayload SeleccionAsientoRequest peticion){
-		ConfirmarViajeResponse confi = new ConfirmarViajeResponse();
-		confi.setSalida("Veracruz");
-		confi.setDestino("CDMX");
-		confi.setFecha("12-12-20");
-		confi.setHora("13:00");
-		//confi.setNombrePasajero(peticion.getNombrePasajero());
-		//confi.setAsiento(peticion.getAsientoSeleccionado());
-		confi.setIDAutobus(123);
-		confi.setIDBoleto(12345);
-		return confi;
+		ConfirmarViajeResponse respuesta = new ConfirmarViajeResponse();
+		CompraDAO compra = new CompraDAO(peticion.getIDViaje(), peticion.getIDAutobus(), peticion.getIDAsientoSeleccionado(), peticion.getNombrePasajero(), peticion.getCorreo());
+		
+		if(compra.realizarCompra()) {
+			
+			ConsultarViajeDAO vi = new ConsultarViajeDAO();
+			Viajes viajes = vi.getViaje(peticion.getIDViaje());
+			
+			if(viajes != null) {
+				int idBoleto = compra.getGenerarIDBoleto();
+				respuesta.setIDBoleto(idBoleto);
+				respuesta.setSalida(viajes.getOrigen());
+				respuesta.setDestino(viajes.getDestino());
+				respuesta.setFecha(viajes.getFecha());
+				respuesta.setHora(viajes.getHora());
+				respuesta.setIDAutobus(viajes.getIDAutobus());
+				respuesta.setAsiento(peticion.getIDAsientoSeleccionado());
+				respuesta.setNombrePasajero(peticion.getNombrePasajero());
+				respuesta.setCorreo(peticion.getCorreo());
+			}
+		}else {
+			respuesta.setSalida("");
+			respuesta.setDestino("");
+			respuesta.setFecha("");
+			respuesta.setHora("");
+			respuesta.setIDAutobus(0);
+			respuesta.setNombrePasajero("");
+		}	
+		return respuesta;
 	}
-	
-	
-	
+
+
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConfirmarViajeRequest")
 	@ResponsePayload
 	public ConfirmarViajeRequest getConfirmar2(@RequestPayload ConfirmarViajeRequest peticion){

@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.04.20 a las 10:53:59 PM CDT 
+// Generado el: 2020.04.21 a las 08:02:49 PM CDT 
 //
 
 
@@ -31,8 +31,9 @@ import javax.xml.bind.annotation.XmlType;
  *         &lt;element name="Fecha" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="Hora" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="IDAutobus" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="Asiento" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="Asiento" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="NombrePasajero" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="Correo" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -50,7 +51,8 @@ import javax.xml.bind.annotation.XmlType;
     "hora",
     "idAutobus",
     "asiento",
-    "nombrePasajero"
+    "nombrePasajero",
+    "correo"
 })
 @XmlRootElement(name = "ConfirmarViajeResponse")
 public class ConfirmarViajeResponse {
@@ -67,10 +69,12 @@ public class ConfirmarViajeResponse {
     protected String hora;
     @XmlElement(name = "IDAutobus")
     protected int idAutobus;
-    @XmlElement(name = "Asiento")
-    protected int asiento;
+    @XmlElement(name = "Asiento", required = true)
+    protected String asiento;
     @XmlElement(name = "NombrePasajero", required = true)
     protected String nombrePasajero;
+    @XmlElement(name = "Correo", required = true)
+    protected String correo;
 
     /**
      * Obtiene el valor de la propiedad idBoleto.
@@ -203,16 +207,24 @@ public class ConfirmarViajeResponse {
     /**
      * Obtiene el valor de la propiedad asiento.
      * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
      */
-    public int getAsiento() {
+    public String getAsiento() {
         return asiento;
     }
 
     /**
      * Define el valor de la propiedad asiento.
      * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
      */
-    public void setAsiento(int value) {
+    public void setAsiento(String value) {
         this.asiento = value;
     }
 
@@ -238,6 +250,30 @@ public class ConfirmarViajeResponse {
      */
     public void setNombrePasajero(String value) {
         this.nombrePasajero = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad correo.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCorreo() {
+        return correo;
+    }
+
+    /**
+     * Define el valor de la propiedad correo.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCorreo(String value) {
+        this.correo = value;
     }
 
 }

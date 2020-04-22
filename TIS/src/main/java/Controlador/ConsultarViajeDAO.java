@@ -70,7 +70,23 @@ public class ConsultarViajeDAO {
 		return valor;
 	}
 	
-	
-	
-	
+	public Viajes getViaje(int id) {
+		Viajes viaje = null;
+		this.conexion = new ConexionBD();
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Viajes WHERE IDViaje="+id);
+			viaje =  new Viajes();
+			if(rs.next()) {
+				viaje.setDestino(rs.getString("Destino"));
+				viaje.setOrigen(rs.getString("Origen"));
+				viaje.setFecha(rs.getString("Fecha"));
+				viaje.setHora(rs.getString("Hora"));
+				viaje.setIDAutobus(rs.getInt("IDAutobus"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+		return viaje;
+	}
 }

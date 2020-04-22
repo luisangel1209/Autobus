@@ -45,11 +45,11 @@ public class AsientoViajeDAO {
 		return lista;	
 	}
 
-	public boolean adquirirAsiento(int idAsiento) {
+	public boolean adquirirAsiento(String idAsiento) {
 		boolean resultado = false;
 		this.conexion = new ConexionBD();
 		try {
-			this.conexion.connect().createStatement().execute("UPDATE Asientos SET Estatus='Ocupado' WHERE ID='"+idAsiento+"'");
+			this.conexion.connect().createStatement().execute("UPDATE Asientos SET Estatus='Ocupado' WHERE IDAsiento='"+idAsiento+"'");
 			resultado = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

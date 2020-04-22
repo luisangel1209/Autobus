@@ -44,8 +44,11 @@
 				<element name="SeleccionAsientoRequest">
 					<complexType>
 						<sequence>
+							<element type="int" name="IDViaje"/>
+							<element type="int" name="IDAutobus"/>
 							<element type="string" name="IDAsientoSeleccionado"/>
 							<element type="string" name="NombrePasajero"/>
+							<element type="string" name="Correo"/>
 						</sequence>
 					</complexType>
 				</element>
@@ -59,8 +62,9 @@
 							<element type="string" name="Fecha" />
 							<element type="string" name="Hora" />
 							<element type="int" name="IDAutobus" />
-							<element type="int" name="Asiento" />
+							<element type="string" name="Asiento" />
 							<element type="string" name="NombrePasajero" />
+							<element type="string" name="Correo" />
 						</sequence>
 					</complexType>
 				</element>
