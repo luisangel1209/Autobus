@@ -4,20 +4,20 @@ public class Compras {
 
 	
 	private int idBoleto;
-	private String NombreCliente;
-	private int idAutobus;
-	private int idAsiento;
+	private int NumeroCliente;
+	private int idViaje;
+	private String idAsiento;
 	private boolean estatus;
 	
 	public Compras() {
 		
 	}
 	
-	public Compras(int idBoleto, String nombreCliente, int idAutobus, int idAsiento, boolean estatus) {
+	public Compras(int idBoleto, int numeroCliente, int idViaje, String idAsiento, boolean estatus) {
 		super();
 		this.idBoleto = idBoleto;
-		this.NombreCliente = nombreCliente;
-		this.idAutobus = idAutobus;
+		this.NumeroCliente = numeroCliente;
+		this.idViaje = idViaje;
 		this.idAsiento = idAsiento;
 		this.estatus = estatus;
 	}
@@ -30,27 +30,27 @@ public class Compras {
 		this.idBoleto = idBoleto;
 	}
 
-	public String getNombreCliente() {
-		return NombreCliente;
+	public int getNumeroCliente() {
+		return NumeroCliente;
 	}
 
-	public void setNombreCliente(String nombreCliente) {
-		NombreCliente = nombreCliente;
+	public void setNumeroCliente(int numeroCliente) {
+		NumeroCliente = numeroCliente;
 	}
 
 	public int getIdAutobus() {
-		return idAutobus;
+		return idViaje;
 	}
 
 	public void setIdAutobus(int idAutobus) {
-		this.idAutobus = idAutobus;
+		this.idViaje = idAutobus;
 	}
 
-	public int getIdAsiento() {
+	public String getIdAsiento() {
 		return idAsiento;
 	}
 
-	public void setIdAsiento(int idAsiento) {
+	public void setIdAsiento(String idAsiento) {
 		this.idAsiento = idAsiento;
 	}
 

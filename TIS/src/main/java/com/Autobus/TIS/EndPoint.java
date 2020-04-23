@@ -90,35 +90,41 @@ public class EndPoint {
 		return respuesta;
 	}
 	
-	
-	
-	
-	
-	
-	
+
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="SeleccionAsientoRequest")
 	@ResponsePayload
 	public ConfirmarViajeResponse getConfirmar(@RequestPayload SeleccionAsientoRequest peticion){
 		ConfirmarViajeResponse respuesta = new ConfirmarViajeResponse();
 		CompraDAO compra = new CompraDAO(peticion.getIDViaje(), peticion.getIDAutobus(), peticion.getIDAsientoSeleccionado(), peticion.getNombrePasajero(), peticion.getCorreo());
-		
-		if(compra.realizarCompra()) {
-			
-			ConsultarViajeDAO vi = new ConsultarViajeDAO();
-			Viajes viajes = vi.getViaje(peticion.getIDViaje());
-			
-			if(viajes != null) {
-				int idBoleto = compra.getGenerarIDBoleto();
-				respuesta.setIDBoleto(idBoleto);
-				respuesta.setSalida(viajes.getOrigen());
-				respuesta.setDestino(viajes.getDestino());
-				respuesta.setFecha(viajes.getFecha());
-				respuesta.setHora(viajes.getHora());
-				respuesta.setIDAutobus(viajes.getIDAutobus());
-				respuesta.setAsiento(peticion.getIDAsientoSeleccionado());
-				respuesta.setNombrePasajero(peticion.getNombrePasajero());
-				respuesta.setCorreo(peticion.getCorreo());
-				respuesta.setMensajeConfirmacion("Compra Realizada con exito");
+		String asiento = compra.getEstatus(peticion.getIDAsientoSeleccionado());
+		if(asiento == "Disponible") {
+			if(compra.realizarCompra()) {
+				ConsultarViajeDAO vi = new ConsultarViajeDAO();
+				Viajes viajes = vi.getViaje(peticion.getIDViaje());
+				if(viajes != null) {
+					int idBoleto = compra.getGenerarIDBoleto();
+					respuesta.setIDBoleto(idBoleto);
+					respuesta.setSalida(viajes.getOrigen());
+					respuesta.setDestino(viajes.getDestino());
+					respuesta.setFecha(viajes.getFecha());
+					respuesta.setHora(viajes.getHora());
+					respuesta.setIDAutobus(viajes.getIDAutobus());
+					respuesta.setAsiento(peticion.getIDAsientoSeleccionado());
+					respuesta.setNombrePasajero(peticion.getNombrePasajero());
+					respuesta.setCorreo(peticion.getCorreo());
+					respuesta.setMensajeConfirmacion("Compra Realizada con exito");
+				}
+			}else {
+				respuesta.setIDBoleto(0);
+				respuesta.setSalida("");
+				respuesta.setDestino("");
+				respuesta.setFecha("");
+				respuesta.setHora("");
+				respuesta.setIDAutobus(0);
+				respuesta.setAsiento("");
+				respuesta.setNombrePasajero("");
+				respuesta.setCorreo("");
+				respuesta.setMensajeConfirmacion("No se pudo realizar la Compra");
 			}
 		}else {
 			respuesta.setIDBoleto(0);
@@ -130,7 +136,7 @@ public class EndPoint {
 			respuesta.setAsiento("");
 			respuesta.setNombrePasajero("");
 			respuesta.setCorreo("");
-			respuesta.setMensajeConfirmacion("No se pudo realizar la Compra");
+			respuesta.setMensajeConfirmacion("Asiento Ocupado: No se pudo realizar la Compra");	
 		}	
 		return respuesta;
 	}
@@ -151,16 +157,23 @@ public class EndPoint {
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="CancelarBoletoRequest")
 	@ResponsePayload
 	public CancelarBoletoResponse getCancelar(@RequestPayload CancelarBoletoRequest peticion){
-		CancelarBoletoResponse cancel = new CancelarBoletoResponse();
-		cancel.setSalida("Veracruz");
-		cancel.setDestino("CDMX");
-		cancel.setFecha("12-12-20");
-		cancel.setHora("13:00");
-		cancel.setNombrePasajero("Jose");
-		cancel.setAsiento(123);
-		cancel.setIDAutobus(123);
-		cancel.setIDBoleto(peticion.getIDBoleto());
-		return cancel;
+		CancelarBoletoResponse respuesta = new CancelarBoletoResponse();
+		CompraDAO compra = new CompraDAO(peticion.getIDBoleto());
+		if(compra.cancelarCompra()) {
+			if(compra.cancelarCompra2(compra.cancelarCompra())) {
+				respuesta.setIDViaje(compra.getCompra().getIdAutobus());
+				respuesta.setIDBoleto(compra.getCompra().getIdBoleto());
+				respuesta.setIDAsiento(compra.getCompra().getIdAsiento());
+				respuesta.setMensajeConfirmacion("Boleto Cancelado");
+			}
+		}else {
+			respuesta.setIDViaje(0);
+			respuesta.setIDBoleto(0);
+			respuesta.setIDAsiento("");
+			respuesta.setMensajeConfirmacion("No se ha podido cancelar el boleto");
+		}
+		
+		return respuesta;
 	}
 	
 }

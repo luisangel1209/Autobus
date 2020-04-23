@@ -99,13 +99,8 @@
 					<complexType>
 						<sequence>
 							<element type="int" name="IDBoleto" />
-							<element type="string" name="Salida" />
-							<element type="string" name="Destino" />
-							<element type="string" name="Fecha" />
-							<element type="string" name="Hora" />
-							<element type="int" name="IDAutobus" />
-							<element type="int" name="Asiento" />
-							<element type="string" name="NombrePasajero" />
+							<element type="int" name="IDViaje" />
+							<element type="string" name="IDAsiento" />
 							<element type="string" name="MensajeConfirmacion" />
 						</sequence>
 					</complexType>

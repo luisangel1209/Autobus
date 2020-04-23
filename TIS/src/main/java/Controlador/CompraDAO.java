@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import Conexion.ConexionBD;
+import Modelo.Compras;
 
 
 public class CompraDAO {
@@ -95,4 +96,69 @@ public class CompraDAO {
 		}
 		return idBoleto;
 	}
+	
+	public boolean cancelarCompra() {
+		boolean resultado = false;
+		String sql = "UPDATE Compras SET ESTATUS=FALSE WHERE IDBoleto="+this.idBoleto;
+		this.conexion = new ConexionBD();
+		try {
+			this.conexion.connect().createStatement().execute(sql);
+			resultado = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	public boolean cancelarCompra2(boolean estatus2) {
+		String estatus = "Disponible";
+		boolean resultado = false;
+		CompraDAO compra = new CompraDAO(this.idBoleto);
+		String boleto = compra.getCompra().getIdAsiento();
+		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento=('"+boleto+"')";
+		this.conexion = new ConexionBD();
+		try {
+			this.conexion.connect().createStatement().execute(sql2);
+			resultado = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
+	
+	public Compras getCompra() {
+		Compras compra = null;
+		this.conexion = new ConexionBD();
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Compras WHERE IDBoleto="+this.idBoleto);
+			if(rs.next()) {
+				compra = new Compras(rs.getInt("IDBoleto"),rs.getInt("NumeroCliente"),rs.getInt("IDViaje"),rs.getString("IDAsiento"),rs.getBoolean("Estatus"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return compra;
+	}
+	
+	public String getEstatus(String asientoseleccionado) {
+		String asiento = asientoseleccionado;
+		String estatus = "";
+		this.conexion = new ConexionBD();
+		String sql = "SELECT Estatus FROM Asientos WHERE IDAsiento=('"+asiento+"')";
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery(sql);
+			if(rs.next()) {
+				estatus = rs.getString("Estatus");
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return estatus;
+	}
+	
 }
