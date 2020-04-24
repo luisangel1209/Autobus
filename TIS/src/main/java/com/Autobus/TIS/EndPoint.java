@@ -45,13 +45,17 @@ public class EndPoint {
 		ArrayList<Viajes> lista = consulta.consultViaje();
 		
 		if(lista.size() !=0) {
+			respuesta.setIDViaje(lista.get(0).getIDViaje());
 			respuesta.setIDAutobus(lista.get(0).getIDAutobus());
 			respuesta.setHora(lista.get(0).getHora());
 			respuesta.setPrecio(lista.get(0).getPrecio());
+			respuesta.setMensaje("Viaje Encontrado");
 		}else {
+			respuesta.setIDViaje(0);
 			respuesta.setIDAutobus(0);
 			respuesta.setHora("");
 			respuesta.setPrecio("");
+			respuesta.setMensaje("No hay viajes existentes");
 		}
 		
 		return respuesta;
