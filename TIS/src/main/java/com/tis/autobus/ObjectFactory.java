@@ -69,11 +69,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link ConfirmarViajeResponse }
+     * Create an instance of {@link SeleccionAsientoResponse }
      * 
      */
-    public ConfirmarViajeResponse createConfirmarViajeResponse() {
-        return new ConfirmarViajeResponse();
+    public SeleccionAsientoResponse createConfirmarViajeResponse() {
+        return new SeleccionAsientoResponse();
     }
 
     /**

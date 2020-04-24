@@ -57,7 +57,7 @@ import javax.xml.bind.annotation.XmlType;
     "mensajeConfirmacion"
 })
 @XmlRootElement(name = "ConfirmarViajeResponse")
-public class ConfirmarViajeResponse {
+public class SeleccionAsientoResponse {
 
     @XmlElement(name = "IDBoleto")
     protected int idBoleto;

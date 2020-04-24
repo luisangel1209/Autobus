@@ -75,6 +75,21 @@ public class CompraDAO {
 		return resultado;
 	}
 	
+	public int BuscarBoleto(int Idboleto) {
+		int boleto = 0;
+		this.conexion = new ConexionBD();
+		String sql = "SELECT IDBoleto FROM Compras WHERE IDBoleto="+Idboleto;
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery(sql);
+			if(rs.next()) {
+				boleto = rs.getInt("IDBoleto");
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return boleto;
+	}
+	
 	public int getGenerarIDBoleto() {
 		
 		int idBoleto = 0;

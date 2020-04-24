@@ -10,7 +10,7 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.tis.autobus.CancelarBoletoRequest;
 import com.tis.autobus.CancelarBoletoResponse;
-import com.tis.autobus.ConfirmarViajeResponse;
+import com.tis.autobus.SeleccionAsientoResponse;
 import com.tis.autobus.ConsultarViajeRequest;
 import com.tis.autobus.ConsultarViajeResponse;
 import com.tis.autobus.ModificarBoletoRequest;
@@ -97,8 +97,8 @@ public class EndPoint {
 
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="SeleccionAsientoRequest")
 	@ResponsePayload
-	public ConfirmarViajeResponse getConfirmar(@RequestPayload SeleccionAsientoRequest peticion){
-		ConfirmarViajeResponse respuesta = new ConfirmarViajeResponse();
+	public SeleccionAsientoResponse getConfirmar(@RequestPayload SeleccionAsientoRequest peticion){
+		SeleccionAsientoResponse respuesta = new SeleccionAsientoResponse();
 		CompraDAO compra = new CompraDAO(peticion.getIDViaje(), peticion.getIDAutobus(), peticion.getIDAsientoSeleccionado(), peticion.getNombrePasajero(), peticion.getCorreo());
 		String asiento = compra.getEstatus(peticion.getIDAsientoSeleccionado());
 		if(asiento == "Disponible") {
@@ -150,10 +150,15 @@ public class EndPoint {
 	public ModificarBoletoResponse getModificar(@RequestPayload ModificarBoletoRequest peticion){
 		ModificarBoletoResponse resultado = new ModificarBoletoResponse();
 		CompraDAO compra = new CompraDAO(peticion.getIDBoleto(), peticion.getNuevoNombrePasajero());
-		if(compra.ModificarCompra()) {
-			resultado.setMensajeConfirmacion("Boleto Modificado");
+		int Boleto = compra.BuscarBoleto(peticion.getIDBoleto());
+		if(Boleto == peticion.getIDBoleto()) {
+			if(compra.ModificarCompra()) {
+				resultado.setMensajeConfirmacion("Boleto Modificado");
+			}else {
+				resultado.setMensajeConfirmacion("No se pudo realizar la modificacion");
+			}
 		}else {
-			resultado.setMensajeConfirmacion("No se pudo realizar la modificacion");
+			resultado.setMensajeConfirmacion("IDBoleto no encontrado");
 		}
 		return resultado;
 	}
@@ -163,20 +168,24 @@ public class EndPoint {
 	public CancelarBoletoResponse getCancelar(@RequestPayload CancelarBoletoRequest peticion){
 		CancelarBoletoResponse respuesta = new CancelarBoletoResponse();
 		CompraDAO compra = new CompraDAO(peticion.getIDBoleto());
-		if(compra.cancelarCompra()) {
-			if(compra.cancelarCompra2(compra.cancelarCompra())) {
-				respuesta.setIDViaje(compra.getCompra().getIdAutobus());
-				respuesta.setIDBoleto(compra.getCompra().getIdBoleto());
-				respuesta.setIDAsiento(compra.getCompra().getIdAsiento());
-				respuesta.setMensajeConfirmacion("Boleto Cancelado");
+		int Boleto = compra.BuscarBoleto(peticion.getIDBoleto());
+		if(Boleto == peticion.getIDBoleto()) {
+			if(compra.cancelarCompra()) {
+				if(compra.cancelarCompra2(compra.cancelarCompra())) {
+					respuesta.setIDViaje(compra.getCompra().getIdAutobus());
+					respuesta.setIDBoleto(compra.getCompra().getIdBoleto());
+					respuesta.setIDAsiento(compra.getCompra().getIdAsiento());
+					respuesta.setMensajeConfirmacion("Boleto Cancelado");
+				}
+			}else {
+				respuesta.setIDViaje(0);
+				respuesta.setIDBoleto(0);
+				respuesta.setIDAsiento("");
+				respuesta.setMensajeConfirmacion("No se ha podido cancelar el boleto");
 			}
 		}else {
-			respuesta.setIDViaje(0);
-			respuesta.setIDBoleto(0);
-			respuesta.setIDAsiento("");
-			respuesta.setMensajeConfirmacion("No se ha podido cancelar el boleto");
+			respuesta.setMensajeConfirmacion("IDBoleto no encontrado");
 		}
-		
 		return respuesta;
 	}
 	
