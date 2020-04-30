@@ -80,15 +80,16 @@ public class EndPoint {
 					estatus.add(a.getIDAsiento()+" | "+ a.getEstatus());
 				}
 			}
-			respuesta.setIdAsiento(idAsientos);	
-			respuesta.setEstatus(estatus);
+			respuesta.toString();
+			//respuesta.setIdAsiento(idAsientos);	
+			//respuesta.setEstatus(estatus);
 		}else {
 			ArrayList<String>idAsientos = new ArrayList<String>();
 			ArrayList<String> estatus = new ArrayList<String>();
 			idAsientos.add("");
 			estatus.add("");
-			respuesta.setIdAsiento(idAsientos);
-			respuesta.setEstatus(estatus);
+			//respuesta.setIdAsiento(idAsientos);
+			//respuesta.setEstatus(estatus);
 		}
 		return respuesta;
 	}

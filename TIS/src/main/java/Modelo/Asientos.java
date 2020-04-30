@@ -38,6 +38,12 @@ public class Asientos {
 	public void setEstatus(String estatus) {
 		Estatus = estatus;
 	}
+	@Override
+	public String toString() {
+		return "Asientos [IDAsiento=" + IDAsiento + ", Estatus=" + Estatus + "]";
+	}
+	
+	
 	
 	
 }
