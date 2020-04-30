@@ -2,7 +2,8 @@
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
 	targetNamespace="http://www.TIS.com/autobus"
 	xmlns:tns="http://www.TIS.com/autobus" 
-	elementFormDefault="qualified">
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
 	
 				<element name="ConsultarViajeRequest">
 					<complexType>
@@ -33,8 +34,8 @@
 						</sequence>
 					</complexType>
 				</element>
-				
-				<element name="SeleccionAutobusResponse">
+								
+				<element name="SeleccionAutobusResponse" >
 					<complexType>
 						<sequence>
 							<element type="string" name="IdAsiento" maxOccurs="unbounded"/>
@@ -55,7 +56,7 @@
 					</complexType>
 				</element>
 				
-				<element name="ConfirmarViajeResponse">
+				<element name="SeleccionAsientoResponse">
 					<complexType>
 						<sequence>
 							<element type="int" name="IDBoleto" />

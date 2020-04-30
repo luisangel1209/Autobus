@@ -2,14 +2,13 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.04.23 a las 10:58:16 PM CDT 
+// Generado el: 2020.04.30 a las 03:41:47 PM CDT 
 //
 
 
 package com.tis.autobus;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -46,10 +45,11 @@ import javax.xml.bind.annotation.XmlType;
 public class SeleccionAutobusResponse {
 
     @XmlElement(name = "IdAsiento", required = true)
-    protected List<String> idAsiento;
+    protected ArrayList<String> idAsiento;
     @XmlElement(name = "Estatus", required = true)
-    protected List<String> estatus;
-
+    protected ArrayList<String> estatus;
+    
+    
     /**
      * Gets the value of the idAsiento property.
      * 
@@ -72,7 +72,7 @@ public class SeleccionAutobusResponse {
      * 
      * 
      */
-    public List<String> getIdAsiento() {
+    public ArrayList<String> getIdAsiento() {
         if (idAsiento == null) {
             idAsiento = new ArrayList<String>();
         }
@@ -101,17 +101,17 @@ public class SeleccionAutobusResponse {
      * 
      * 
      */
-    public List<String> getEstatus() {
+    public ArrayList<String> getEstatus() {
         if (estatus == null) {
             estatus = new ArrayList<String>();
         }
         return this.estatus;
     }
-    public void setIdAsiento(List<String> idAsiento) {
+    public void setIdAsiento(ArrayList<String> idAsiento) {
 		this.idAsiento = idAsiento;
 	}
 
-	public void setEstatus(List<String> estatus) {
+	public void setEstatus(ArrayList<String> estatus) {
 		this.estatus = estatus;
 	}
 
