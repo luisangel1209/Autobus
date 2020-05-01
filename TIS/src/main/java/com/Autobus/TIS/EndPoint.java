@@ -83,12 +83,9 @@ public class EndPoint {
 			respuesta.setIdAsiento(""+idAsientos);	
 			respuesta.setEstatus(""+estatus);
 		}else {
-			ArrayList<String>idAsientos = new ArrayList<String>();
-			ArrayList<String> estatus = new ArrayList<String>();
-			idAsientos.add("");
-			estatus.add("");
-			respuesta.setIdAsiento(""+idAsientos);
-			respuesta.setEstatus(""+estatus);
+			
+			respuesta.setIdAsiento("Error");
+			respuesta.setEstatus("");
 		}
 		return respuesta;
 	}

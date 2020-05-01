@@ -38,8 +38,8 @@
 				<element name="SeleccionAutobusResponse">
 					<complexType>
 						<sequence>
-							<element type="string" name="IdAsiento" maxOccurs="unbounded"/>
-							<element type="string" name="Estatus" maxOccurs="unbounded"/>
+							<element type="string" name="IdAsiento" />
+							<element type="string" name="Estatus" />
 						</sequence>
 					</complexType>
 				</element>
