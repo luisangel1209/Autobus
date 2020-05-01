@@ -80,16 +80,15 @@ public class EndPoint {
 					estatus.add(a.getIDAsiento()+" | "+ a.getEstatus());
 				}
 			}
-			respuesta.toString();
-			//respuesta.setIdAsiento(idAsientos);	
-			//respuesta.setEstatus(estatus);
+			respuesta.setIdAsiento(""+idAsientos);	
+			respuesta.setEstatus(""+estatus);
 		}else {
 			ArrayList<String>idAsientos = new ArrayList<String>();
 			ArrayList<String> estatus = new ArrayList<String>();
 			idAsientos.add("");
 			estatus.add("");
-			//respuesta.setIdAsiento(idAsientos);
-			//respuesta.setEstatus(estatus);
+			respuesta.setIdAsiento(""+idAsientos);
+			respuesta.setEstatus(""+estatus);
 		}
 		return respuesta;
 	}
@@ -100,8 +99,10 @@ public class EndPoint {
 	public SeleccionAsientoResponse getConfirmar(@RequestPayload SeleccionAsientoRequest peticion){
 		SeleccionAsientoResponse respuesta = new SeleccionAsientoResponse();
 		CompraDAO compra = new CompraDAO(peticion.getIDViaje(), peticion.getIDAutobus(), peticion.getIDAsientoSeleccionado(), peticion.getNombrePasajero(), peticion.getCorreo());
-		String asiento = compra.getEstatus(peticion.getIDAsientoSeleccionado());
-		if(asiento == "Disponible") {
+		boolean status = compra.getEstatus(peticion.getIDAsientoSeleccionado());
+		System.out.println("Hola"+ status);
+		if(status == true) {
+			System.out.println("Hola");
 			if(compra.realizarCompra()) {
 				ConsultarViajeDAO vi = new ConsultarViajeDAO();
 				Viajes viajes = vi.getViaje(peticion.getIDViaje());
@@ -141,7 +142,7 @@ public class EndPoint {
 			respuesta.setNombrePasajero("");
 			respuesta.setCorreo("");
 			respuesta.setMensajeConfirmacion("Asiento Ocupado: No se pudo realizar la Compra");	
-		}	
+		}
 		return respuesta;
 	}
 

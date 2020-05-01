@@ -44,6 +44,14 @@ public class AsientoViajeDAO {
 		}
 		return lista;	
 	}
+	
+	public static String[] GetStringArray(ArrayList<String> arr){ 
+        String str[] = new String[arr.size()]; 
+        for (int j = 0; j < arr.size(); j++) {  
+            str[j] = arr.get(j); 
+        }
+        return str; 
+    } 
 
 	public boolean adquirirAsiento(String idAsiento) {
 		boolean resultado = false;

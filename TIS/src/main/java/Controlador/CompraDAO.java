@@ -158,16 +158,26 @@ public class CompraDAO {
 		return compra;
 	}
 	
-	public String getEstatus(String asientoseleccionado) {
+	public boolean getEstatus(String asientoseleccionado) {
 		String asiento = asientoseleccionado;
-		String estatus = "";
+		boolean estatus = false;
+		String estatus2 = "";
+		String estatus3 = "Disponible";
 		this.conexion = new ConexionBD();
 		String sql = "SELECT Estatus FROM Asientos WHERE IDAsiento=('"+asiento+"')";
 		try {
 			ResultSet rs = this.conexion.connect().createStatement().executeQuery(sql);
 			if(rs.next()) {
-				estatus = rs.getString("Estatus");
+				estatus2 = rs.getString("Estatus");
+				System.out.println(estatus2);
+				if(estatus3.equals(estatus2)) {
+					estatus = true;
+				}
 			}
+			//estatus = true;
+			//if(rs.next()) {
+				//estatus = rs.getString("Estatus");
+			//}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

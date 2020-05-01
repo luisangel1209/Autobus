@@ -46,9 +46,9 @@ import javax.xml.bind.annotation.XmlType;
 public class SeleccionAutobusResponse {
 
     @XmlElement(name = "IdAsiento", required = true)
-    protected List<String> idAsiento;
+    protected String idAsiento;
     @XmlElement(name = "Estatus", required = true)
-    protected List<String> estatus;
+    protected String estatus;
 
     /**
      * Gets the value of the idAsiento property.
@@ -72,10 +72,7 @@ public class SeleccionAutobusResponse {
      * 
      * 
      */
-    public List<String> getIdAsiento() {
-        if (idAsiento == null) {
-            idAsiento = new ArrayList<String>();
-        }
+    public String getIdAsiento() {
         return this.idAsiento;
     }
 
@@ -101,16 +98,18 @@ public class SeleccionAutobusResponse {
      * 
      * 
      */
-    public List<String> getEstatus() {
-        if (estatus == null) {
-            estatus = new ArrayList<String>();
-        }
+    public String getEstatus() {
         return this.estatus;
     }
-    
-    @Override
-	public String toString() {
-		return "SeleccionAutobusResponse [idAsiento=" + idAsiento + ", estatus=" + estatus + "]";
+
+	public void setIdAsiento(String string) {
+		idAsiento = string;
+		
 	}
 
+	public void setEstatus(String string) {
+		estatus = string;
+		
+	}
+    
 }
