@@ -2,7 +2,7 @@
 Esta es la linea de Autobuces ADOL
 # Para iniciar
 Para hacer uso de este servicio es importante que cuente con conexion a Internet
-## API v2.0
+## API v3.0
 ### Consultar Viaje
 Datos que recibe:
 | Parametros | Descripcion |
