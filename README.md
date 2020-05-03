@@ -99,7 +99,7 @@ Datos que regresa:
 | Correo | **String** Correo del pasajero ingresado anteriormente |
 | MensajeConfirmacion | **String** Mensaje de apoyo para el usuario |
 ```
-Ejemplo de respuesta (En este caso están todos los asientos ocupados:
+Ejemplo de respuesta (En este caso están todos los asientos ocupados):
 <ns2:SeleccionAsientoResponse xmlns:ns2="http://www.TIS.com/autobus">
             <ns2:IDBoleto>0</ns2:IDBoleto>
             <ns2:Salida/>
