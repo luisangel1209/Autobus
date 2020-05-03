@@ -69,11 +69,11 @@ Ejemplo de respuesta:
 Datos que recibe:
 | Parametros | Descripcion |
 | ----- | ---- |
-| AsientoSeleccionado | **Int** ID del Asiento que se halla seleccionado  |
+| IDViaje | **Int** ID del Viaje que se halla seleccionado  |
+| IDAutobus | **Int** ID del Viaje que se halla seleccionado  |
+| IDAsientoSeleccionado | **String** ID del Asiento que se halla seleccionado  |
 | NombrePasajero | **String** Nombre del pasajero que viajará  |
-| AsientoSeleccionado | **Int** ID del Asiento que se halla seleccionado  |
-| NombrePasajero | **String** Nombre del pasajero que viajará  |
-| AsientoSeleccionado | **Int** ID del Asiento que se halla seleccionado  |
+| CorreodelPasajeto | **String** Correo del pasajaero |
 ```
 Ejemplo de peticion:
 <SeleccionAsientoRequest xmlns="http://www.TIS.com/autobus">
