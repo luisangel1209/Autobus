@@ -41,9 +41,5 @@ public class Asientos {
 	@Override
 	public String toString() {
 		return "Asientos [IDAsiento=" + IDAsiento + ", Estatus=" + Estatus + "]";
-	}
-	
-	
-	
-	
+	}	
 }

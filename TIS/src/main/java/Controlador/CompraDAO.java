@@ -131,7 +131,8 @@ public class CompraDAO {
 		boolean resultado = false;
 		CompraDAO compra = new CompraDAO(this.idBoleto);
 		String boleto = compra.getCompra().getIdAsiento();
-		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento=('"+boleto+"')";
+		int viaje = compra.getCompra().getIdAutobus();
+		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento=('"+boleto+"') AND IDAutobus="+viaje;
 		this.conexion = new ConexionBD();
 		try {
 			this.conexion.connect().createStatement().execute(sql2);
@@ -158,13 +159,14 @@ public class CompraDAO {
 		return compra;
 	}
 	
-	public boolean getEstatus(String asientoseleccionado) {
+	public boolean getEstatus(String asientoseleccionado, int autobus) {
+		int bus = autobus;
 		String asiento = asientoseleccionado;
 		boolean estatus = false;
 		String estatus2 = "";
 		String estatus3 = "Disponible";
 		this.conexion = new ConexionBD();
-		String sql = "SELECT Estatus FROM Asientos WHERE IDAsiento=('"+asiento+"')";
+		String sql = "SELECT Estatus FROM Asientos WHERE IDAsiento=('"+asiento+"') AND IDAutobus="+this.idAutobus;
 		try {
 			ResultSet rs = this.conexion.connect().createStatement().executeQuery(sql);
 			if(rs.next()) {

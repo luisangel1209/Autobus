@@ -26,7 +26,7 @@ public class ClienteDAO {
 		boolean resultado = false;
 		this.conexion = new ConexionBD();
 		try {
-			this.conexion.connect().createStatement().execute("INSERT INTO Clientes(NumeroCliente,Nombre,Correo) VALUES (NULL,'"+this.nombre+"','"+this.correo+"')");
+			this.conexion.connect().createStatement().execute("INSERT INTO Clientes(NumeroCliente,Nombre,Correo,Contra) VALUES (NULL,'"+this.nombre+"','"+this.correo+"', NULL)");
 			resultado = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

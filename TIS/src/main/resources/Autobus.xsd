@@ -18,11 +18,17 @@
 				<element name="ConsultarViajeResponse">
 					<complexType>
 						<sequence>
-							<element type="int" name="IDViaje"/>
-							<element type="int" name="IDAutobus" />
-							<element type="string" name="Hora" />
-							<element type="string" name="Precio" />
-							<element type="string" name="Mensaje" />
+							<element name="Viaje" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element type="int" name="IDViaje"/>
+										<element type="int" name="IDAutobus" />
+										<element type="string" name="Hora" />
+										<element type="string" name="Precio" />
+										<element type="string" name="Mensaje" />
+									</sequence>
+								</complexType>
+							</element>
 						</sequence>
 					</complexType>
 				</element>
@@ -38,8 +44,14 @@
 				<element name="SeleccionAutobusResponse">
 					<complexType>
 						<sequence>
-							<element type="string" name="IdAsiento" />
-							<element type="string" name="Estatus" />
+							<element name="Asiento" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element type="string" name="IdAsiento"/>
+										<element type="string" name="Estatus" />
+									</sequence>
+								</complexType>
+							</element>
 						</sequence>
 					</complexType>
 				</element>

@@ -42,21 +42,20 @@ public class EndPoint {
 		
 		ConsultarViajeDAO consulta = new ConsultarViajeDAO(peticion.getSalida(),peticion.getDestino(),peticion.getFecha());
 		ArrayList<Viajes> lista = consulta.consultViaje();
+		ArrayList<ConsultarViajeResponse.Viaje> listarespuesta = new ArrayList<ConsultarViajeResponse.Viaje>();
 		
-		if(lista.size() !=0) {
-			respuesta.setIDViaje(lista.get(0).getIDViaje());
-			respuesta.setIDAutobus(lista.get(0).getIDAutobus());
-			respuesta.setHora(lista.get(0).getHora());
-			respuesta.setPrecio(lista.get(0).getPrecio());
-			respuesta.setMensaje("Viaje Encontrado");
-		}else {
-			respuesta.setIDViaje(0);
-			respuesta.setIDAutobus(0);
-			respuesta.setHora("");
-			respuesta.setPrecio("");
-			respuesta.setMensaje("No hay viajes existentes");
+		if(lista.size() != 0) {
+			for (Viajes viaje:lista) {
+				ConsultarViajeResponse.Viaje temp = new ConsultarViajeResponse.Viaje();
+				temp.setIDViaje(viaje.getIDViaje());
+				temp.setIDAutobus(viaje.getIDAutobus());
+				temp.setHora(viaje.getHora());
+				temp.setPrecio(viaje.getPrecio());
+				temp.setMensaje("Viaje Encontrado");
+				listarespuesta.add(temp);
+			}
+			respuesta.getViaje().addAll(listarespuesta);
 		}
-		
 		return respuesta;
 	}
 	
@@ -68,24 +67,23 @@ public class EndPoint {
 		SeleccionAutobusResponse respuesta = new SeleccionAutobusResponse();
 		AsientoViajeDAO asiento = new AsientoViajeDAO(peticion1.getIDSeleccion());
 		ArrayList<Asientos> asientosViaje = asiento.getAsientos();
+		ArrayList<SeleccionAutobusResponse.Asiento> asientosresp = new ArrayList<SeleccionAutobusResponse.Asiento>();
 		
 		if(asientosViaje.size() != 0) {
-			ArrayList<String> idAsientos = new ArrayList<String>();
-			ArrayList<String> estatus = new ArrayList<String>();
 			for(Asientos a:asientosViaje) {
-				idAsientos.add(a.getIDAsiento());
-				if(a.getEstatus() == "Ocupado") {
-					estatus.add(a.getIDAsiento()+" | "+ a.getEstatus());
+				SeleccionAutobusResponse.Asiento temp = new SeleccionAutobusResponse.Asiento();
+				temp.setIdAsiento(a.getIDAsiento());
+				System.out.println(""+a.getEstatus());
+				String D = "Disponible";
+				if(D.equals(a.getEstatus())) {
+					temp.setEstatus("Disponible");
 				}else {
-					estatus.add(a.getIDAsiento()+" | "+ a.getEstatus());
+					temp.setEstatus("Ocupado");
 				}
+				asientosresp.add(temp);
 			}
-			respuesta.setIdAsiento(""+idAsientos);	
-			respuesta.setEstatus(""+estatus);
+			respuesta.getAsiento().addAll(asientosresp);
 		}else {
-			
-			respuesta.setIdAsiento("Error");
-			respuesta.setEstatus("");
 		}
 		return respuesta;
 	}
@@ -96,7 +94,7 @@ public class EndPoint {
 	public SeleccionAsientoResponse getConfirmar(@RequestPayload SeleccionAsientoRequest peticion){
 		SeleccionAsientoResponse respuesta = new SeleccionAsientoResponse();
 		CompraDAO compra = new CompraDAO(peticion.getIDViaje(), peticion.getIDAutobus(), peticion.getIDAsientoSeleccionado(), peticion.getNombrePasajero(), peticion.getCorreo());
-		boolean status = compra.getEstatus(peticion.getIDAsientoSeleccionado());
+		boolean status = compra.getEstatus(peticion.getIDAsientoSeleccionado(), peticion.getIDAutobus());
 		System.out.println("Hola"+ status);
 		if(status == true) {
 			System.out.println("Hola");
