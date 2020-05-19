@@ -9,6 +9,8 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 import com.tis.autobus.CancelarBoletoRequest;
 import com.tis.autobus.CancelarBoletoResponse;
+import com.tis.autobus.ConsultarDestinoRequest;
+import com.tis.autobus.ConsultarDestinoResponse;
 import com.tis.autobus.SeleccionAsientoResponse;
 import com.tis.autobus.ConsultarViajeRequest;
 import com.tis.autobus.ConsultarViajeResponse;
@@ -34,6 +36,29 @@ public class EndPoint {
 	 * @return
 	 * @throws ClassNotFoundException 
 	 */
+@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConsultarDestinoRequest")
+	
+	@ResponsePayload
+	public ConsultarDestinoResponse getConsultaDestino(@RequestPayload ConsultarDestinoRequest peticion){
+		ConsultarDestinoResponse respuesta = new ConsultarDestinoResponse();
+		
+		ConsultarViajeDAO consulta = new ConsultarViajeDAO();
+		ArrayList<Viajes> lista = consulta.consultViaje2();
+		ArrayList<ConsultarDestinoResponse.Viajes> listarespuesta = new ArrayList<ConsultarDestinoResponse.Viajes>();
+		
+		if(lista.size() != 0) {
+			for (Viajes viaje:lista) {
+				ConsultarDestinoResponse.Viajes temp = new ConsultarDestinoResponse.Viajes();
+				temp.setSalida(viaje.getOrigen());
+				temp.setDestino(viaje.getDestino());
+				listarespuesta.add(temp);
+			}
+			respuesta.getViajes().addAll(listarespuesta);
+		}
+		return respuesta;
+	}
+	
+
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConsultarViajeRequest")
 	
 	@ResponsePayload

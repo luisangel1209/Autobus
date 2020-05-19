@@ -5,6 +5,28 @@
 	elementFormDefault="qualified"
 	attributeFormDefault="unqualified">
 	
+				<element name="ConsultarDestinoRequest">
+					<complexType>
+						<sequence>
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="ConsultarDestinoResponse">
+					<complexType>
+						<sequence>
+							<element name="Viajes" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element type="string" name="Salida" />
+										<element type="string" name="Destino" />
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+	
 				<element name="ConsultarViajeRequest">
 					<complexType>
 						<sequence>

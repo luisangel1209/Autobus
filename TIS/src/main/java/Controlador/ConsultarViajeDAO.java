@@ -89,4 +89,25 @@ public class ConsultarViajeDAO {
 		}	
 		return viaje;
 	}
+	
+public ArrayList<Viajes> consultViaje2(){
+		
+		ArrayList<Viajes> viaje = new ArrayList<Viajes>(); 
+		
+		this.conexion = new ConexionBD();
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Viajes");
+			while(rs.next()) {
+				viaje.add(new Viajes(rs.getInt("IDViaje"), rs.getInt("IDAutobus"), rs.getString("Origen"), rs.getString("Destino"), rs.getString("Fecha"), rs.getString("Hora"), rs.getString("Precio")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return viaje;	
+	}
+	
+	
+	
 }

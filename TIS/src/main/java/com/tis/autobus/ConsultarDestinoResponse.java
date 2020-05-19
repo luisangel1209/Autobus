@@ -27,13 +27,13 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="Asiento" maxOccurs="unbounded">
+ *         &lt;element name="Viajes" maxOccurs="unbounded">
  *           &lt;complexType>
  *             &lt;complexContent>
  *               &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *                 &lt;sequence>
- *                   &lt;element name="IdAsiento" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *                   &lt;element name="Estatus" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="Salida" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *                   &lt;element name="Destino" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *                 &lt;/sequence>
  *               &lt;/restriction>
  *             &lt;/complexContent>
@@ -49,41 +49,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "asiento"
+    "viajes"
 })
-@XmlRootElement(name = "SeleccionAutobusResponse")
-public class SeleccionAutobusResponse {
+@XmlRootElement(name = "ConsultarDestinoResponse")
+public class ConsultarDestinoResponse {
 
-    @XmlElement(name = "Asiento", required = true)
-    protected List<SeleccionAutobusResponse.Asiento> asiento;
+    @XmlElement(name = "Viajes", required = true)
+    protected List<ConsultarDestinoResponse.Viajes> viajes;
 
     /**
-     * Gets the value of the asiento property.
+     * Gets the value of the viajes property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the asiento property.
+     * This is why there is not a <CODE>set</CODE> method for the viajes property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getAsiento().add(newItem);
+     *    getViajes().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link SeleccionAutobusResponse.Asiento }
+     * {@link ConsultarDestinoResponse.Viajes }
      * 
      * 
      */
-    public List<SeleccionAutobusResponse.Asiento> getAsiento() {
-        if (asiento == null) {
-            asiento = new ArrayList<SeleccionAutobusResponse.Asiento>();
+    public List<ConsultarDestinoResponse.Viajes> getViajes() {
+        if (viajes == null) {
+            viajes = new ArrayList<ConsultarDestinoResponse.Viajes>();
         }
-        return this.asiento;
+        return this.viajes;
     }
 
 
@@ -97,8 +97,8 @@ public class SeleccionAutobusResponse {
      *   &lt;complexContent>
      *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
      *       &lt;sequence>
-     *         &lt;element name="IdAsiento" type="{http://www.w3.org/2001/XMLSchema}string"/>
-     *         &lt;element name="Estatus" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="Salida" type="{http://www.w3.org/2001/XMLSchema}string"/>
+     *         &lt;element name="Destino" type="{http://www.w3.org/2001/XMLSchema}string"/>
      *       &lt;/sequence>
      *     &lt;/restriction>
      *   &lt;/complexContent>
@@ -109,62 +109,62 @@ public class SeleccionAutobusResponse {
      */
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
-        "idAsiento",
-        "estatus"
+        "salida",
+        "destino"
     })
-    public static class Asiento {
+    public static class Viajes {
 
-        @XmlElement(name = "IdAsiento", required = true)
-        protected String idAsiento;
-        @XmlElement(name = "Estatus", required = true)
-        protected String estatus;
+        @XmlElement(name = "Salida", required = true)
+        protected String salida;
+        @XmlElement(name = "Destino", required = true)
+        protected String destino;
 
         /**
-         * Obtiene el valor de la propiedad idAsiento.
+         * Obtiene el valor de la propiedad salida.
          * 
          * @return
          *     possible object is
          *     {@link String }
          *     
          */
-        public String getIdAsiento() {
-            return idAsiento;
+        public String getSalida() {
+            return salida;
         }
 
         /**
-         * Define el valor de la propiedad idAsiento.
+         * Define el valor de la propiedad salida.
          * 
          * @param value
          *     allowed object is
          *     {@link String }
          *     
          */
-        public void setIdAsiento(String value) {
-            this.idAsiento = value;
+        public void setSalida(String value) {
+            this.salida = value;
         }
 
         /**
-         * Obtiene el valor de la propiedad estatus.
+         * Obtiene el valor de la propiedad destino.
          * 
          * @return
          *     possible object is
          *     {@link String }
          *     
          */
-        public String getEstatus() {
-            return estatus;
+        public String getDestino() {
+            return destino;
         }
 
         /**
-         * Define el valor de la propiedad estatus.
+         * Define el valor de la propiedad destino.
          * 
          * @param value
          *     allowed object is
          *     {@link String }
          *     
          */
-        public void setEstatus(String value) {
-            this.estatus = value;
+        public void setDestino(String value) {
+            this.destino = value;
         }
 
     }
