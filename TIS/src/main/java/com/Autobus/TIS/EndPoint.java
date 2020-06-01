@@ -2,6 +2,9 @@ package com.Autobus.TIS;
 
 
 import java.util.ArrayList;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
 import org.springframework.ws.server.endpoint.annotation.RequestPayload;
@@ -208,6 +211,5 @@ public class EndPoint {
 			respuesta.setMensajeConfirmacion("IDBoleto no encontrado");
 		}
 		return respuesta;
-	}
-	
+	}	
 }
