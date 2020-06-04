@@ -8,7 +8,7 @@ public class Clientes {
 	
 	public Clientes() {
 	}
-
+	
 	public Clientes(int numero, String nombre, String correo) {
 		super();
 		this.numero = numero;
