@@ -5,11 +5,15 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tis.autobus.ConsultarDestinoResponse;
+import com.tis.autobus.ConsultarViajeResponse;
+import com.tis.autobus.ConsultarViajeResponse.Viaje;
 import com.tis.autobus.SeleccionAutobusResponse;
 
 import Controlador.AsientoViajeDAO;
@@ -23,7 +27,9 @@ import Modelo.Viajes;
 @RestController
 public class mensajesREST {
 	
-	@GetMapping("/rest/viajes")
+
+	
+	@GetMapping("/rest/destinos")
 	public ArrayList<Viajes> viajes() {
 		ConsultarViajeDAO consulta = new ConsultarViajeDAO();
 		ArrayList<Viajes> lista = consulta.consultViaje2();
@@ -37,39 +43,59 @@ public class mensajesREST {
 		return listarespuesta;
 	}
 	
-	@GetMapping("/api/var")
-	public ArrayList<Asientos> asientos(@RequestParam(defaultValue = "/?idautobus=")
-	int id) {
-		AsientoViajeDAO asiento = new AsientoViajeDAO(id);
+	@GetMapping("/rest/viajes/{salida}/{destino}/{fecha}")
+	public ArrayList<Viaje> consultaviaje(@PathVariable String salida,@PathVariable String destino,@PathVariable String fecha) {	
+		System.out.println(""+ salida);
+		System.out.println(""+ destino);
+		System.out.println(""+ fecha);
+		ConsultarViajeDAO consulta = new ConsultarViajeDAO(salida,destino,fecha);
+		ArrayList<Viajes> lista = consulta.consultViaje();
+		ArrayList<Viaje> listarespuesta = new ArrayList<Viaje>();
+		if(lista.size() != 0) {
+			for (Viajes viaje:lista) {
+				ConsultarViajeResponse.Viaje temp = new ConsultarViajeResponse.Viaje();
+				temp.setIDViaje(viaje.getIDViaje());
+				temp.setIDAutobus(viaje.getIDAutobus());
+				temp.setHora(viaje.getHora());
+				temp.setPrecio(viaje.getPrecio());
+				temp.setMensaje("Viaje Encontrado");
+				listarespuesta.add(temp);
+			}
+		}
+		return listarespuesta;
+	}
+	
+	
+	@GetMapping("/rest/asientos/{idautobus}")
+	public ArrayList<Asientos> asientos(@PathVariable int idautobus) {
+		AsientoViajeDAO asiento = new AsientoViajeDAO(idautobus);
 		ArrayList<Asientos> asientosViaje = asiento.getAsientos();
 		ArrayList<Asientos> asientosresp = new ArrayList<Asientos>();
-		
+		System.out.println(""+ idautobus);
 			for(Asientos a:asientosViaje) {
 				System.out.println(""+a.getEstatus());
-				/*String D = "Disponible";
-				if(D.equals(a.getEstatus())) {
-					temp.setEstatus("Disponible");
-				}else {
-					temp.setEstatus("Ocupado");
-				}*/
 				asientosresp.add(a);
 			}
 		return asientosresp;
 	}
 	
-	@GetMapping("/api/varrr")
-	public String boleto(@RequestParam(defaultValue = "/?idViaje=1&idAutobus=1&idAsiento=A3&Pasajero=Mendoza&Correo=mendoza@hotmail.com")
-	int viaje, int autobus, String asiento, String nompasa, String correo) {
+	@GetMapping("/rest/compra/{idviaje}/{idautobus}/{idasientoseleccionado}/{NombrePasajero}/{correo}")
+	public String boleto(@PathVariable int idviaje,@PathVariable int idautobus,@PathVariable String idasientoseleccionado,@PathVariable String NombrePasajero,@PathVariable String correo) {
 		String res = null;
-		CompraDAO compra = new CompraDAO(viaje, autobus, asiento, nompasa, correo);
-		boolean status = compra.getEstatus(asiento, autobus);
+		String idboleto = null;
+		int bol = 0;
+		CompraDAO compra = new CompraDAO(idviaje, idautobus, idasientoseleccionado, NombrePasajero, correo);
+		boolean status = compra.getEstatus(idasientoseleccionado, idautobus);
 		if(status == true) {
 			if(compra.realizarCompra()) {
 				ConsultarViajeDAO vi = new ConsultarViajeDAO();
-				Viajes viajes = vi.getViaje(viaje);
+				Viajes viajes = vi.getViaje(idviaje);
 				if(viajes != null) {
 					int idBoleto = compra.getGenerarIDBoleto();
-					res = "Compra realizada";
+					bol = idBoleto;
+					idboleto= bol+"";
+					res = "Compra realizada, tu IDBoleto es: ";
+					
 					/*respuesta.setIDBoleto(idBoleto);
 					respuesta.setSalida(viajes.getOrigen());
 					respuesta.setDestino(viajes.getDestino());
@@ -107,6 +133,6 @@ public class mensajesREST {
 			respuesta.setMensajeConfirmacion("Asiento Ocupado: No se pudo realizar la Compra");*/
 			res = "Asiento Ocupado: No se pudo realizar la Compra";
 			}
-		return res;
+		return res.concat(idboleto);
 		}
 }

@@ -22,12 +22,28 @@ public class ClienteDAO {
 		this.correo = correo;
 	}
 
-	public boolean AltaCliente() {
-		boolean resultado = false;
+	public boolean AltaCliente(String correo) {
+		System.out.println(""+correo);
+	    boolean resultado = false;
 		this.conexion = new ConexionBD();
 		try {
-			this.conexion.connect().createStatement().execute("INSERT INTO Clientes(NumeroCliente,Nombre,Correo,Contra) VALUES (NULL,'"+this.nombre+"','"+this.correo+"', NULL)");
-			resultado = true;
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Clientes");
+			while(rs.next()) {
+				System.out.println(""+rs.getString("Correo"));
+				if(rs.getString("Correo").equals(correo)) {
+					System.out.println("Usuario ya registrado");
+					resultado = true;
+				}
+			}
+			if(resultado == false) {
+				try {
+					this.conexion.connect().createStatement().execute("INSERT INTO Clientes(NumeroCliente,Nombre,Correo,Contra) VALUES (NULL,'"+this.nombre+"','"+this.correo+"', NULL)");
+					resultado = true;
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

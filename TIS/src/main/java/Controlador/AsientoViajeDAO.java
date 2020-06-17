@@ -53,11 +53,11 @@ public class AsientoViajeDAO {
         return str; 
     } 
 
-	public boolean adquirirAsiento(String idAsiento) {
+	public boolean adquirirAsiento(String idAsiento, int idautobus) {
 		boolean resultado = false;
 		this.conexion = new ConexionBD();
 		try {
-			this.conexion.connect().createStatement().execute("UPDATE Asientos SET Estatus='Ocupado' WHERE IDAsiento='"+idAsiento+"'");
+			this.conexion.connect().createStatement().execute("UPDATE Asientos SET Estatus='Ocupado' WHERE IDAsiento='"+idAsiento+"' AND IDAutobus="+idautobus);
 			resultado = true;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

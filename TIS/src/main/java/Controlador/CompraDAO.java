@@ -40,13 +40,13 @@ public class CompraDAO {
 		this.conexion = new ConexionBD();
 		AsientoViajeDAO asiento = new AsientoViajeDAO();
 		ClienteDAO cliente = new ClienteDAO(this.NombrePasajero,this.Correo);
-		boolean resultAsiento = asiento.adquirirAsiento(idAsiento);
+		boolean resultAsiento = asiento.adquirirAsiento(idAsiento, idAutobus);
 		
 		if(resultAsiento) {
-			boolean resultadoCliente = cliente.AltaCliente();
+			boolean resultadoCliente = cliente.AltaCliente(this.Correo);
 			if(resultadoCliente) {
 				int numeroCliente = cliente.getNumCliente();
-				String sql = "INSERT INTO Compras(IDBoleto,NumeroCliente,IDViaje,Estatus,IDAsiento) VALUES(NULL,'"+numeroCliente+"','"+this.idViaje+"',true,'"+this.idAsiento+"')";
+				String sql = "INSERT INTO Compras(IDBoleto,NumeroCliente,IDViaje,Estatus,IDAsiento) VALUES(NULL,'"+numeroCliente+"','"+this.idViaje+"','"+1+"','"+this.idAsiento+"')";
 				try {
 					this.conexion.connect().createStatement().execute(sql);
 					resultado = true;
@@ -91,12 +91,13 @@ public class CompraDAO {
 	}
 	
 	public int getGenerarIDBoleto() {
-		
+		System.out.println(""+this.idAsiento);
+		int estatus = 1;
 		int idBoleto = 0;
 		ClienteDAO cliente = new ClienteDAO(this.NombrePasajero,this.Correo);
 		int numeroCliente = cliente.getNumCliente();
 		this.conexion = new ConexionBD();
-		String sql = "SELECT IDBoleto FROM Compras WHERE NumeroCliente="+numeroCliente+" AND IDViaje="+this.idViaje;
+		String sql = "SELECT * FROM Compras WHERE NumeroCliente="+numeroCliente+" AND IDViaje="+this.idViaje+" AND IDAsiento='"+this.idAsiento+"' AND Estatus="+estatus;
 		
 		try {
 			ResultSet rs = this.conexion.connect().createStatement().executeQuery(sql);
@@ -133,6 +134,7 @@ public class CompraDAO {
 		String boleto = compra.getCompra().getIdAsiento();
 		int viaje = compra.getCompra().getIdAutobus();
 		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento=('"+boleto+"') AND IDAutobus="+viaje;
+		
 		this.conexion = new ConexionBD();
 		try {
 			this.conexion.connect().createStatement().execute(sql2);
