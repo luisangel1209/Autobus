@@ -14,6 +14,8 @@ import com.tis.autobus.ConsultarDestinoResponse;
 import com.tis.autobus.SeleccionAsientoResponse;
 import com.tis.autobus.ConsultarViajeRequest;
 import com.tis.autobus.ConsultarViajeResponse;
+import com.tis.autobus.MisViajesRequest;
+import com.tis.autobus.MisViajesResponse;
 import com.tis.autobus.ModificarBoletoRequest;
 import com.tis.autobus.ModificarBoletoResponse;
 import com.tis.autobus.SeleccionAsientoRequest;
@@ -21,10 +23,12 @@ import com.tis.autobus.SeleccionAutobusRequest;
 import com.tis.autobus.SeleccionAutobusResponse;
 
 import Controlador.AsientoViajeDAO;
+import Controlador.ClienteDAO;
 import Controlador.CompraDAO;
 import Controlador.ConsultarViajeDAO;
 import Modelo.Viajes;
 import Modelo.Asientos;
+import Modelo.Compras;
 
 
 @Endpoint
@@ -58,7 +62,6 @@ public class EndPoint {
 		return respuesta;
 	}
 	
-
 	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="ConsultarViajeRequest")
 	
 	@ResponsePayload
@@ -109,6 +112,34 @@ public class EndPoint {
 			}
 			respuesta.getAsiento().addAll(asientosresp);
 		}else {
+		}
+		return respuesta;
+	}
+	
+	
+	@PayloadRoot(namespace="http://www.TIS.com/autobus", localPart="MisViajesRequest")
+	@ResponsePayload
+	public MisViajesResponse getMisViajes(@RequestPayload MisViajesRequest peticion) {
+		MisViajesResponse respuesta = new MisViajesResponse();
+		CompraDAO com = new CompraDAO(peticion.getNombreIngresadoEnLaCompra(), peticion.getCorreoIngresadoEnLaCompra());
+		ArrayList<Compras> compras = com.getCompra2();
+		ArrayList<MisViajesResponse.MisViajes> listarespuesta = new ArrayList<MisViajesResponse.MisViajes>();
+		if(compras.size() != 0) {
+			for(Compras c:compras) {
+				MisViajesResponse.MisViajes temp = new MisViajesResponse.MisViajes();
+				temp.setIDBoleto(c.getIdBoleto());
+				temp.setIDViaje(c.idViaje);
+				temp.setIDAsiento(c.getIdAsiento());
+				listarespuesta.add(temp);
+			}
+			respuesta.getMisViajes().addAll(listarespuesta);
+		}else {
+			MisViajesResponse.MisViajes temp = new MisViajesResponse.MisViajes();
+			temp.setIDBoleto(0);
+			temp.setIDViaje(0);
+			temp.setIDAsiento("Sin Viajes Hasta el Momento");
+			listarespuesta.add(temp);
+			respuesta.getMisViajes().addAll(listarespuesta);
 		}
 		return respuesta;
 	}

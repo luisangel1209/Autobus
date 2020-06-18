@@ -3,11 +3,11 @@ package Modelo;
 public class Compras {
 
 	
-	private int idBoleto;
-	private int NumeroCliente;
-	private int idViaje;
-	private String idAsiento;
-	private boolean estatus;
+	public int idBoleto;
+	public int NumeroCliente;
+	public int idViaje;
+	public String idAsiento;
+	public boolean estatus;
 	
 	public Compras() {
 		

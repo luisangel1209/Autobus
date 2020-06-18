@@ -107,6 +107,31 @@
 					</complexType>
 				</element>
 				
+				<element name="MisViajesRequest">
+					<complexType>
+						<sequence>
+							<element type="string" name="NombreIngresadoEnLaCompra" />
+							<element type="string" name="CorreoIngresadoEnLaCompra" />
+						</sequence>
+					</complexType>
+				</element>
+				
+				<element name="MisViajesResponse">
+					<complexType>
+						<sequence>
+							<element name="MisViajes" maxOccurs="unbounded">
+								<complexType>
+									<sequence>
+										<element type="int" name="IDBoleto" />
+										<element type="int" name="IDViaje" />
+										<element type="string" name="IDAsiento" />
+									</sequence>
+								</complexType>
+							</element>
+						</sequence>
+					</complexType>
+				</element>
+				
 				<element name="ModificarBoletoRequest">
 					<complexType>
 						<sequence>

@@ -25,8 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="IDBoleto" type="{http://www.w3.org/2001/XMLSchema}int"/>
- *         &lt;element name="NuevoNombrePasajero" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="NombreIngresadoEnLaCompra" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="CorreoIngresadoEnLaCompra" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -37,55 +37,63 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "idBoleto",
-    "nuevoNombrePasajero"
+    "nombreIngresadoEnLaCompra",
+    "correoIngresadoEnLaCompra"
 })
-@XmlRootElement(name = "ModificarBoletoRequest")
-public class ModificarBoletoRequest {
+@XmlRootElement(name = "MisViajesRequest")
+public class MisViajesRequest {
 
-    @XmlElement(name = "IDBoleto")
-    protected int idBoleto;
-    @XmlElement(name = "NuevoNombrePasajero", required = true)
-    protected String nuevoNombrePasajero;
-
-    /**
-     * Obtiene el valor de la propiedad idBoleto.
-     * 
-     */
-    public int getIDBoleto() {
-        return idBoleto;
-    }
+    @XmlElement(name = "NombreIngresadoEnLaCompra", required = true)
+    protected String nombreIngresadoEnLaCompra;
+    @XmlElement(name = "CorreoIngresadoEnLaCompra", required = true)
+    protected String correoIngresadoEnLaCompra;
 
     /**
-     * Define el valor de la propiedad idBoleto.
-     * 
-     */
-    public void setIDBoleto(int value) {
-        this.idBoleto = value;
-    }
-
-    /**
-     * Obtiene el valor de la propiedad nuevoNombrePasajero.
+     * Obtiene el valor de la propiedad nombreIngresadoEnLaCompra.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getNuevoNombrePasajero() {
-        return nuevoNombrePasajero;
+    public String getNombreIngresadoEnLaCompra() {
+        return nombreIngresadoEnLaCompra;
     }
 
     /**
-     * Define el valor de la propiedad nuevoNombrePasajero.
+     * Define el valor de la propiedad nombreIngresadoEnLaCompra.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setNuevoNombrePasajero(String value) {
-        this.nuevoNombrePasajero = value;
+    public void setNombreIngresadoEnLaCompra(String value) {
+        this.nombreIngresadoEnLaCompra = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad correoIngresadoEnLaCompra.
+     * 
+     * @return
+     *     possible object is
+     *     {@link String }
+     *     
+     */
+    public String getCorreoIngresadoEnLaCompra() {
+        return correoIngresadoEnLaCompra;
+    }
+
+    /**
+     * Define el valor de la propiedad correoIngresadoEnLaCompra.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link String }
+     *     
+     */
+    public void setCorreoIngresadoEnLaCompra(String value) {
+        this.correoIngresadoEnLaCompra = value;
     }
 
 }

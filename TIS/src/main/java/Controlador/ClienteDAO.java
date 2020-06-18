@@ -80,4 +80,19 @@ public class ClienteDAO {
 		}
 		return resultado;
 	}
+	
+	public int getNumCliente3() {
+		int resultado = 0;
+		this.conexion = new ConexionBD();
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT NumeroCliente FROM Clientes WHERE Nombre='"+this.nombre+"' AND Correo='"+this.correo+"'");
+			if(rs.next()) {
+				resultado = rs.getInt("NumeroCliente");
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resultado;
+	}
 }

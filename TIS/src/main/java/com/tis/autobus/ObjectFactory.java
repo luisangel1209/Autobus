@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.05.19 a las 02:52:59 PM CDT 
+// Generado el: 2020.06.17 a las 09:29:43 PM CDT 
 //
 
 
@@ -37,6 +37,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link MisViajesResponse }
+     * 
+     */
+    public MisViajesResponse createMisViajesResponse() {
+        return new MisViajesResponse();
+    }
+
+    /**
+     * Create an instance of {@link SeleccionAutobusResponse }
+     * 
+     */
+    public SeleccionAutobusResponse createSeleccionAutobusResponse() {
+        return new SeleccionAutobusResponse();
+    }
+
+    /**
      * Create an instance of {@link ConsultarViajeResponse }
      * 
      */
@@ -53,11 +69,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SeleccionAutobusResponse }
+     * Create an instance of {@link MisViajesResponse.MisViajes }
      * 
      */
-    public SeleccionAutobusResponse createSeleccionAutobusResponse() {
-        return new SeleccionAutobusResponse();
+    public MisViajesResponse.MisViajes createMisViajesResponseMisViajes() {
+        return new MisViajesResponse.MisViajes();
+    }
+
+    /**
+     * Create an instance of {@link SeleccionAsientoRequest }
+     * 
+     */
+    public SeleccionAsientoRequest createSeleccionAsientoRequest() {
+        return new SeleccionAsientoRequest();
+    }
+
+    /**
+     * Create an instance of {@link SeleccionAutobusResponse.Asiento }
+     * 
+     */
+    public SeleccionAutobusResponse.Asiento createSeleccionAutobusResponseAsiento() {
+        return new SeleccionAutobusResponse.Asiento();
+    }
+
+    /**
+     * Create an instance of {@link CancelarBoletoResponse }
+     * 
+     */
+    public CancelarBoletoResponse createCancelarBoletoResponse() {
+        return new CancelarBoletoResponse();
     }
 
     /**
@@ -66,6 +106,14 @@ public class ObjectFactory {
      */
     public SeleccionAsientoResponse createSeleccionAsientoResponse() {
         return new SeleccionAsientoResponse();
+    }
+
+    /**
+     * Create an instance of {@link MisViajesRequest }
+     * 
+     */
+    public MisViajesRequest createMisViajesRequest() {
+        return new MisViajesRequest();
     }
 
     /**
@@ -101,27 +149,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link SeleccionAsientoRequest }
-     * 
-     */
-    public SeleccionAsientoRequest createSeleccionAsientoRequest() {
-        return new SeleccionAsientoRequest();
-    }
-
-    /**
      * Create an instance of {@link ModificarBoletoResponse }
      * 
      */
     public ModificarBoletoResponse createModificarBoletoResponse() {
         return new ModificarBoletoResponse();
-    }
-
-    /**
-     * Create an instance of {@link SeleccionAutobusResponse.Asiento }
-     * 
-     */
-    public SeleccionAutobusResponse.Asiento createSeleccionAutobusResponseAsiento() {
-        return new SeleccionAutobusResponse.Asiento();
     }
 
     /**
@@ -138,14 +170,6 @@ public class ObjectFactory {
      */
     public SeleccionAutobusRequest createSeleccionAutobusRequest() {
         return new SeleccionAutobusRequest();
-    }
-
-    /**
-     * Create an instance of {@link CancelarBoletoResponse }
-     * 
-     */
-    public CancelarBoletoResponse createCancelarBoletoResponse() {
-        return new CancelarBoletoResponse();
     }
 
     /**

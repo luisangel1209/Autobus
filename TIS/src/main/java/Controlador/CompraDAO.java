@@ -2,6 +2,7 @@ package Controlador;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import Conexion.ConexionBD;
 import Modelo.Compras;
@@ -25,6 +26,11 @@ public class CompraDAO {
 		this.idBoleto = iDBoleto;
 		this.NuevoNombrePasajero = nuevonombrepasajero;
 	}
+	
+	public CompraDAO(String Nombre, String Correo) {
+		this.NombrePasajero = Nombre;
+		this.Correo = Correo;
+	}
 
 	public CompraDAO(int idViaje, int idAutobus, String idAsiento, String nombrePasajero, String correo) {
 		super();
@@ -35,6 +41,9 @@ public class CompraDAO {
 		this.Correo = correo;
 	}
 	
+	public CompraDAO() {
+	}
+
 	public boolean realizarCompra() {
 		boolean resultado = false;
 		this.conexion = new ConexionBD();
@@ -159,6 +168,23 @@ public class CompraDAO {
 			e.printStackTrace();
 		}
 		return compra;
+	}
+	
+	public ArrayList<Compras> getCompra2() {
+		ArrayList<Compras> lista = new ArrayList<Compras>();
+		ClienteDAO viaje = new ClienteDAO(this.NombrePasajero, this.Correo);
+		int numerocliente = viaje.getNumCliente3();
+		this.conexion = new ConexionBD();
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT * FROM Compras WHERE Estatus="+1+" AND NumeroCliente="+numerocliente);
+			while(rs.next()) {
+				lista.add(new Compras(rs.getInt("IDBoleto"),rs.getInt("NumeroCliente"),rs.getInt("IDViaje"),rs.getString("IDAsiento"),rs.getBoolean("Estatus")));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lista;
 	}
 	
 	public boolean getEstatus(String asientoseleccionado, int autobus) {
