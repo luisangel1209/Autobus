@@ -201,13 +201,13 @@ public class EndPoint {
 	@ResponsePayload
 	public ModificarBoletoResponse getModificar(@RequestPayload ModificarBoletoRequest peticion){
 		ModificarBoletoResponse resultado = new ModificarBoletoResponse();
-		CompraDAO compra = new CompraDAO(peticion.getIDBoleto(), peticion.getNuevoNombrePasajero());
+		CompraDAO compra = new CompraDAO(peticion.getIDBoleto());
 		int Boleto = compra.BuscarBoleto(peticion.getIDBoleto());
 		if(Boleto == peticion.getIDBoleto()) {
-			if(compra.ModificarCompra()) {
+			if(compra.ModificarCompra(peticion.getNuevoIDAsiento(), peticion.getIDAsientoAnterior())) {
 				resultado.setMensajeConfirmacion("Boleto Modificado");
 			}else {
-				resultado.setMensajeConfirmacion("No se pudo realizar la modificacion");
+				resultado.setMensajeConfirmacion("No se pudo realizar la modificacion asiento ocupado");
 			}
 		}else {
 			resultado.setMensajeConfirmacion("IDBoleto no encontrado");

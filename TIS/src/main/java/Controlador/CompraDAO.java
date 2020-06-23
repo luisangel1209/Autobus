@@ -22,11 +22,6 @@ public class CompraDAO {
 		this.idBoleto = iDBoleto;
 	}
 	
-	public CompraDAO(int iDBoleto, String nuevonombrepasajero) {
-		this.idBoleto = iDBoleto;
-		this.NuevoNombrePasajero = nuevonombrepasajero;
-	}
-	
 	public CompraDAO(String Nombre, String Correo) {
 		this.NombrePasajero = Nombre;
 		this.Correo = Correo;
@@ -68,17 +63,44 @@ public class CompraDAO {
 		return resultado;
 	}
 	
-	public boolean ModificarCompra() {
+	public boolean ModificarCompra(String nuevoid, String viejoid) {
 		boolean resultado = false;
 		ClienteDAO cliente = new ClienteDAO(this.idBoleto);
 		int numerocliente = cliente.getNumCliente2();
-		String sql = "UPDATE Clientes SET Nombre='"+this.NuevoNombrePasajero+"' WHERE NumeroCliente="+numerocliente;
+		if(getEstatus2(nuevoid)) {
+			if(cancelarAsiento(nuevoid,viejoid)) {
+				String sql = "UPDATE Compras SET IDAsiento='"+nuevoid+"' WHERE IDBoleto="+this.idBoleto+" AND Estatus="+1+" AND NumeroCliente="+numerocliente;
+				this.conexion = new ConexionBD();
+				try {
+					this.conexion.connect().createStatement().execute(sql);
+					resultado=true;
+				}catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}else {
+				return resultado;
+			}
+		}else {
+			return resultado;
+		}
+		
+		return resultado;
+	}
+	
+	public boolean cancelarAsiento(String nuevoid, String viejoid) {
+		String estatuso = "Ocupado";
+		String estatus = "Disponible";
+		boolean resultado = false;
+		String sql = "UPDATE Asientos SET Estatus='"+estatuso+"' WHERE IDAsiento=('"+nuevoid+"')";
+		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento=('"+viejoid+"')";
 		this.conexion = new ConexionBD();
 		try {
 			this.conexion.connect().createStatement().execute(sql);
-			resultado=true;
-		}catch (Exception e) {
-			// TODO: handle exception
+			this.conexion.connect().createStatement().execute(sql2);
+			resultado = true;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return resultado;
@@ -124,7 +146,7 @@ public class CompraDAO {
 	
 	public boolean cancelarCompra() {
 		boolean resultado = false;
-		String sql = "UPDATE Compras SET ESTATUS=FALSE WHERE IDBoleto="+this.idBoleto;
+		String sql = "UPDATE Compras SET ESTATUS="+0+" WHERE IDBoleto="+this.idBoleto;
 		this.conexion = new ConexionBD();
 		try {
 			this.conexion.connect().createStatement().execute(sql);
@@ -216,4 +238,31 @@ public class CompraDAO {
 		return estatus;
 	}
 	
+	public boolean getEstatus2(String asientoseleccionado) {
+		String asiento = asientoseleccionado;
+		boolean estatus = false;
+		String estatus2 = "";
+		String estatus3 = "Disponible";
+		this.conexion = new ConexionBD();
+		String sql = "SELECT Estatus FROM Asientos WHERE IDAsiento=('"+asiento+"')";
+		try {
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery(sql);
+			if(rs.next()) {
+				estatus2 = rs.getString("Estatus");
+				System.out.println(estatus2);
+				if(estatus3.equals(estatus2)) {
+					estatus = true;
+				}
+			}
+			//estatus = true;
+			//if(rs.next()) {
+				//estatus = rs.getString("Estatus");
+			//}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return estatus;
+	}
 }
