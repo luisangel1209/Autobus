@@ -63,12 +63,12 @@ public class CompraDAO {
 		return resultado;
 	}
 	
-	public boolean ModificarCompra(String nuevoid, String viejoid) {
+	public boolean ModificarCompra(int idviaje, String nuevoid, String viejoid) {
 		boolean resultado = false;
 		ClienteDAO cliente = new ClienteDAO(this.idBoleto);
 		int numerocliente = cliente.getNumCliente2();
 		if(getEstatus2(nuevoid)) {
-			if(cancelarAsiento(nuevoid,viejoid)) {
+			if(cancelarAsiento(idviaje,nuevoid,viejoid)) {
 				String sql = "UPDATE Compras SET IDAsiento='"+nuevoid+"' WHERE IDBoleto="+this.idBoleto+" AND Estatus="+1+" AND NumeroCliente="+numerocliente;
 				this.conexion = new ConexionBD();
 				try {
@@ -88,12 +88,12 @@ public class CompraDAO {
 		return resultado;
 	}
 	
-	public boolean cancelarAsiento(String nuevoid, String viejoid) {
+	public boolean cancelarAsiento(int idviaje, String nuevoid, String viejoid) {
 		String estatuso = "Ocupado";
 		String estatus = "Disponible";
 		boolean resultado = false;
-		String sql = "UPDATE Asientos SET Estatus='"+estatuso+"' WHERE IDAsiento=('"+nuevoid+"')";
-		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento=('"+viejoid+"')";
+		String sql = "UPDATE Asientos SET Estatus='"+estatuso+"' WHERE IDAsiento='"+nuevoid+"' AND IDAutobus="+idviaje;
+		String sql2 = "UPDATE Asientos SET Estatus='"+estatus+"' WHERE IDAsiento='"+viejoid+"' AND IDAutobus="+idviaje;
 		this.conexion = new ConexionBD();
 		try {
 			this.conexion.connect().createStatement().execute(sql);

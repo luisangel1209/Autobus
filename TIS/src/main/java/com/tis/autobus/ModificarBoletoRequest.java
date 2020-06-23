@@ -2,7 +2,7 @@
 // Este archivo ha sido generado por la arquitectura JavaTM para la implantación de la referencia de enlace (JAXB) XML v2.2.7 
 // Visite <a href="http://java.sun.com/xml/jaxb">http://java.sun.com/xml/jaxb</a> 
 // Todas las modificaciones realizadas en este archivo se perderán si se vuelve a compilar el esquema de origen. 
-// Generado el: 2020.06.19 a las 03:39:40 PM CDT 
+// Generado el: 2020.06.23 a las 12:20:40 AM CDT 
 //
 
 
@@ -26,6 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="IDBoleto" type="{http://www.w3.org/2001/XMLSchema}int"/>
+ *         &lt;element name="IDViaje" type="{http://www.w3.org/2001/XMLSchema}int"/>
  *         &lt;element name="IDAsientoAnterior" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="NuevoIDAsiento" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *       &lt;/sequence>
@@ -39,6 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "idBoleto",
+    "idViaje",
     "idAsientoAnterior",
     "nuevoIDAsiento"
 })
@@ -47,6 +49,8 @@ public class ModificarBoletoRequest {
 
     @XmlElement(name = "IDBoleto")
     protected int idBoleto;
+    @XmlElement(name = "IDViaje")
+    protected int idViaje;
     @XmlElement(name = "IDAsientoAnterior", required = true)
     protected String idAsientoAnterior;
     @XmlElement(name = "NuevoIDAsiento", required = true)
@@ -66,6 +70,22 @@ public class ModificarBoletoRequest {
      */
     public void setIDBoleto(int value) {
         this.idBoleto = value;
+    }
+
+    /**
+     * Obtiene el valor de la propiedad idViaje.
+     * 
+     */
+    public int getIDViaje() {
+        return idViaje;
+    }
+
+    /**
+     * Define el valor de la propiedad idViaje.
+     * 
+     */
+    public void setIDViaje(int value) {
+        this.idViaje = value;
     }
 
     /**

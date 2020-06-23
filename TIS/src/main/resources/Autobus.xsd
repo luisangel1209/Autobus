@@ -136,6 +136,7 @@
 					<complexType>
 						<sequence>
 							<element type="int" name="IDBoleto" />
+							<element type="int" name="IDViaje" />
 							<element type="string" name="IDAsientoAnterior" />
 							<element type="string" name="NuevoIDAsiento" />
 						</sequence>

@@ -204,7 +204,7 @@ public class EndPoint {
 		CompraDAO compra = new CompraDAO(peticion.getIDBoleto());
 		int Boleto = compra.BuscarBoleto(peticion.getIDBoleto());
 		if(Boleto == peticion.getIDBoleto()) {
-			if(compra.ModificarCompra(peticion.getNuevoIDAsiento(), peticion.getIDAsientoAnterior())) {
+			if(compra.ModificarCompra(peticion.getIDViaje(), peticion.getNuevoIDAsiento(), peticion.getIDAsientoAnterior())) {
 				resultado.setMensajeConfirmacion("Boleto Modificado");
 			}else {
 				resultado.setMensajeConfirmacion("No se pudo realizar la modificacion asiento ocupado");

@@ -70,7 +70,7 @@ public class ClienteDAO {
 		int resultado = 0;
 		this.conexion = new ConexionBD();
 		try {
-			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT NumeroCliente FROM Compras WHERE IDBoleto='"+this.idBoleto+"'");
+			ResultSet rs = this.conexion.connect().createStatement().executeQuery("SELECT NumeroCliente FROM Compras WHERE IDBoleto="+this.idBoleto);
 			if(rs.next()) {
 				resultado = rs.getInt("NumeroCliente");
 			}
