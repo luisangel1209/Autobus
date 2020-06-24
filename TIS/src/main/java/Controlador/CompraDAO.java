@@ -13,7 +13,6 @@ public class CompraDAO {
 	private int idAutobus;
 	private String idAsiento;
 	private String NombrePasajero;
-	private String NuevoNombrePasajero;
 	private String Correo;
 	private ConexionBD conexion;
 	private int idBoleto;
@@ -50,7 +49,7 @@ public class CompraDAO {
 			boolean resultadoCliente = cliente.AltaCliente(this.Correo);
 			if(resultadoCliente) {
 				int numeroCliente = cliente.getNumCliente();
-				String sql = "INSERT INTO Compras(IDBoleto,NumeroCliente,IDViaje,Estatus,IDAsiento) VALUES(NULL,'"+numeroCliente+"','"+this.idViaje+"','"+1+"','"+this.idAsiento+"')";
+				String sql = "INSERT INTO Compras(IDBoleto,NumeroCliente,IDViaje,Estatus,IDAsiento,NombrePasajero) VALUES(NULL,'"+numeroCliente+"','"+this.idViaje+"','"+1+"','"+this.idAsiento+"', '"+this.NombrePasajero+"')";
 				try {
 					this.conexion.connect().createStatement().execute(sql);
 					resultado = true;
