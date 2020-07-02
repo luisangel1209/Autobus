@@ -1,7 +1,7 @@
 # Autobus
 Esta es la linea de Autobuces ADOL
 
-Descargar el consumidor del [Servicio](https://github.com/luisangel1209/Autobus) para probarlo o mejor aun visitanos en [Autobuces ADOL](https://github.com/luisangel1209/Autobus)
+Descargar el consumidor del [Servicio](https://github.com/luisangel1209/Consumidor-Autobus) para probarlo o mejor aun visitanos en [Autobuces ADOL](http://18.234.73.61/Sistema/SistemaWeb/Index.html)
 # Para iniciar
 Para hacer uso de este servicio es importante que cuente con conexion a Internet
 ## API v3.0
