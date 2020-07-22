@@ -4,15 +4,18 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tis.autobus.ConsultarDestinoResponse;
 import com.tis.autobus.ConsultarViajeResponse;
+import com.tis.autobus.ModificarBoletoResponse;
 import com.tis.autobus.ConsultarViajeResponse.Viaje;
 import com.tis.autobus.SeleccionAutobusResponse;
 
@@ -79,7 +82,44 @@ public class mensajesREST {
 		return asientosresp;
 	}
 	
-	@GetMapping("/rest/compra/{idviaje}/{idautobus}/{idasientoseleccionado}/{NombrePasajero}/{correo}")
+	@GetMapping("/rest/modificar/{idboleto}/{idviaje}/{asientoviejo}/{asientonuevo}")
+	public String modificar(@PathVariable int idboleto, @PathVariable int idviaje, @PathVariable String asientoviejo, @PathVariable String asientonuevo) {
+		String res = null;
+		CompraDAO compra = new CompraDAO(idboleto);
+		int Boleto = compra.BuscarBoleto(idboleto);
+		if(Boleto == idboleto) {
+			if(compra.ModificarCompra(idviaje, asientonuevo, asientoviejo)) {
+				res = "Boleto Modificado";
+			}else {
+				res = "No se pudo realizar la modificacion asiento ocupado";
+			}
+		}else {
+			res = "IDBoleto no encontrado";
+		}
+		return res;
+	}
+	
+	@GetMapping("/rest/eliminar/{idboleto}")
+	public String eliminar(@PathVariable int idboleto) {
+		String res = null;
+		CompraDAO compra = new CompraDAO(idboleto);
+		int Boleto = compra.BuscarBoleto(idboleto);
+		if(Boleto == idboleto) {
+			if(compra.cancelarCompra()) {
+				if(compra.cancelarCompra2(compra.cancelarCompra())) {
+					res = "Boleto Cancelado";
+				}
+			}else {
+				res = "No se ha podido cancelar el boleto";
+			}
+		}else {
+			res = "IDBoleto no encontrado";
+		}
+		return res;
+	}	
+	
+	
+	@PutMapping("/rest/compra/{idviaje}/{idautobus}/{idasientoseleccionado}/{NombrePasajero}/{correo}")
 	public String boleto(@PathVariable int idviaje,@PathVariable int idautobus,@PathVariable String idasientoseleccionado,@PathVariable String NombrePasajero,@PathVariable String correo) {
 		String res = null;
 		String idboleto = null;
